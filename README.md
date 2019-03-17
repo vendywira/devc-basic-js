@@ -1,6 +1,8 @@
 # devc-basic-js
 Learn more about html, css and js basic with expert on devc community Jakarta.
 
+![screenshot cv](sc-cv.png "Title")
+
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
  and harder to maintain. we need sass for this condition. 
