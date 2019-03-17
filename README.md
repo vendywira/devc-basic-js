@@ -4,8 +4,8 @@ Learn more about html, css and js basic with expert on devc community Jakarta.
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
  and harder to maintain. we need sass for this condition. 
-What is Sass? Sass is preprocessor which will help you to maintenance you css. we can use concept like method, inheritance,
- operator on css like we use on programming language.
+What is Sass? Sass is preprocessor which will help you to maintenance your css. we can use function, inheritance and
+ operator like programming language.
  for implement sass on our project, we should be install node js and sass.
 And then type command like bellow to auto compile scss to css when any changes.
 ```sass
