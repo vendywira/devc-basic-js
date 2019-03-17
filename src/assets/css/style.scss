@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+// color
+$red : #c2331a !default;
+$black : #000 !default;
+
+// font
+$raleway : "Raleway", sans-serif;
+$robotoCondesed: "Roboto Condensed", sans-serif;
+
+
+$singleGrid: 100/12;
+
+.grid {
+  &__md-1 {
+    width: $singleGrid*1%;
+  }
+
+  &__md-2 {
+    width: $singleGrid*2%;
+  }
+
+  &__md-3 {
+    width: $singleGrid*3%;
+  }
+
+  &__md-4 {
+    width: $singleGrid*4%;
+  }
+
+  &__md-5 {
+    width: $singleGrid*5%;
+  }
+
+  &__md-6 {
+    width: $singleGrid*6%;
+  }
+
+  &__md-7 {
+    width: $singleGrid*7%;
+  }
+
+  &__md-8 {
+    width: $singleGrid*8%;
+  }
+
+  &__md-9 {
+    width: $singleGrid*9%;
+  }
+
+  &__md-10 {
+    width: $singleGrid*10%;
+  }
+
+  &__md-12 {
+    width: $singleGrid*12%;
+  }
+
+}
+
+.element-header {
+  margin: 3%;
+  display: inline-block;
+
+  &__display_inline {
+    margin: 0px;
+    display: inline-block;
+  }
+
+  &__line {
+    height: 5px;
+    background-color: $red;
+    width: 99.8%;
+  }
+
+  &__photo-profile {
+    width: 15%;
+    height: 15%;
+    border-radius: 50%;
+  }
+
+  &__text {
+    font-family: $robotoCondesed;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 5.8vw;
+    font-weight: 700;
+    margin-block-start: 0;
+    margin-block-end: 0;
+
+    &--black {
+      color: $black;
+    }
+
+    &--red {
+      color: $red;
+    }
+  }
+
+  &__job {
+    font-family: $raleway;
+    font-size: 4vw;
+    color: $black;
+    font-weight: bolder;
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+
+  &__contact {
+    text-align: right;
+    font-size: 1.1vw;
+    font-family: $raleway;
+    float: right;
+    margin: 5% 3% 5% 0px
+  }
+}
+
+.element-body {
+  margin-right: 5%;
+  color: $black;
+  &__text {
+    &__title {
+      letter-spacing: 0.05em;
+      font-size: 3.5vw;
+      text-align: right;
+      text-transform: uppercase;
+      font-family: $robotoCondesed;
+      transform-origin: left top;
+      line-height: 1;
+      margin-left: 0px;
+      margin-block-end: 0px;
+      margin-block-start: 0px;
+      display: inline-block;
+      margin-left: 5%;
+
+      &--red {
+        font-size: 2.5vw;
+        color: $red;
+      }
+
+      &--bold {
+        font-weight: 500;
+        font-family: $robotoCondesed;
+        margin: 5% 0px 0px;
+      }
+    }
+
+    &__content {
+      display: inline-block;
+      font-family: Raleway, sans-serif;
+      font-size: 1.5vw;
+      line-height: 1.22;
+      word-wrap: break-word;
+      margin-block-start: 0px;
+      margin-block-end: 0px;
+    }
+
+  }
+
+  &__line {
+    height: 1%;
+    stroke-width: 3%;
+    display: inline-block;
+    position: absolute;
+    margin-block-start: 1%;
+    background-color: $red;
+  }
+}
+
+.separate {
+  margin-top: 5%;
+}
+
+.footer {
+  margin-top: 20%;
+  display: block;
+  width: 99.8%;
+  height: 5px;
+  background-color: $red;
+}

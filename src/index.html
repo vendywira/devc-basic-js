@@ -5,125 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="header">
-    <svg viewBox="0 0 1000 5">
-      <rect class="line line__header"></rect>
-    </svg>
-    <div style="display: inline-block; padding: 30px;">
-        <div class="svg__photo-profile">
-            <svg viewBox="0 0 500 500" enable-background="new 0 0 500 500" stroke="transparent" stroke-width="0" style="position: absolute;">
-                <clipPath id="_photo-profile">
-                  <path d="M500,250.002c0,138.065-111.931,249.996-250,249.996c-138.071,0-250-111.931-250-249.996C0,111.93,111.929,0,250,0C388.071,0,500,111.93,500,250.002z"></path>
-                </clipPath>
-              <image clip-path="url(#_photo-profile)" xlink:href="photo.png" x="0.0068359375" y="-83.33203124999999" width="499.986328125" height="666.6484375"/>
-              <path d="M500,250.002c0,138.065-111.931,249.996-250,249.996c-138.071,0-250-111.931-250-249.996C0,111.93,111.929,0,250,0C388.071,0,500,111.93,500,250.002z" 
-                    class="outline" fill="none" style="stroke-width: 4.36122549400461px; stroke-dasharray: 13.083676482013828 13.083676482013828;"/>
-            </svg>
-        </div>
-        <div style="display: inline-block">
-          <p class="text text__name text_name--black">I Wayan Vendy</p>
-          <p class="text text__name text__name--red">Wiranatha</p>
-          <p class="text text__job">Software Engineer</p>
-        </div>
-        <div class="contact-info">
-          <p>Email: vendywira@gmail.com</p>
-          <p>Github: <a href="https://github.com/vendywira" target="blank" alt="github">https://github.com/vendywira</a></p>
-          <p>Linkedin: <a href="https://id.linkedin.com/in/vendywira" target="blank" alt="linkedin">https://id.linkedin.com/in/vendywira</a></p>
-        </div>
-    </div>
+<div class="grid grid__md-12">
+  <div class="element-header__line">
   </div>
-  <div class="content">
-    <div>
-        <p class="content content__title" style="display:inline-block">Profile</p>
-        <svg viewBox="0 0 450 2" class="content__title__line">
-            <rect class="line"></rect>
-        </svg>
+  <img class="grid grid__md-2 element-header element-header__photo-profile" src="assets/img/photo.png" alt="photo profile">
+  <div class="grid grid__md-6 element-header__display_inline">
+    <p class="element-header__text element-header__text--black">I Wayan Vendy</p>
+    <p class="element-header__text element-header__text--red">Wiranatha</p>
+    <p class="element-header__job">Software Engineer</p>
+  </div>
+  <div class="grid grid__md-3 element-header element-header__contact">
+    <p>Email: vendywira@gmail.com</p>
+    <p>Github: <a href="https://github.com/vendywira" target="blank" alt="github">https://github.com/vendywira</a></p>
+    <p>Linkedin: <a href="https://id.linkedin.com/in/vendywira" target="blank" alt="linkedin">https://id.linkedin.com/in/vendywira</a>
+    </p>
+  </div>
+</div>
+<div class="grid grid__md-12">
+  <div class="profile separate">
+    <p class="grid grid__md-2 element-body element-body__text element-body__text__title">Profile</p>
+    <div class="grid grid__md-8 element-body element-body__line">
     </div>
     <div>
-      <div class="content content__title content__title--red"></div>
-      <p class="content content__text">
-        Software development engineer professional for almost 3 years. 
+      <div class="grid grid__md-2 element-body element-body__text__title element-body__text__title--red"></div>
+      <p class="grid grid__md-8 element-body element-body__text__content">
+        Software development engineer professional for almost 3 years.
         I had experience worked at e-commerce and travel company.
         Expertise in backend development use java spring and Kotlin for android development.
       </p>
     </div>
+  </div>
+  <div class="experience separate">
+    <p class="grid grid__md-2 element-body element-body__text element-body__text__title" style="display:inline-block">Experience</p>
+    <div class="grid grid__md-8 element-body element-body__line"></div>
     <div>
-        <p class="content content__title" style="display:inline-block">Experience
-        </p>
-        <svg viewBox="0 0 450 2" class="content__title__line">
-            <rect class="line"></rect>
-        </svg>
-    </div>
-    <div>
-      <div class="content content__title content__title--red">Software Engineer</div>
-      <div class="content content__text">
-        <p class="content content__title--bold">Blibli.com (2017 - present)</p>
-          <ul>
-              <li>Work experience with the Spring Framework (core framework and Spring Boot)</li>
-              <li>Work experience with Spring Cloud</li>
-              <li>Working on agile team (Scrum)</li>
-              <li>Integrate api to third party payment gateway</li>
-              <li>Build system click and collect (buy online and pickup on store)</li>
-              <li>Build system for pre-order in blibli retail</li>
-              <li>Enhancement combine shipping system</li>
-            </ul>
-      </div>
-      <div class="content content__title content__title--red">Quality Ansurance Engineer</div>
-      <div class="content content__text">
-        <p class="content content__title--bold">Blibli.com (2016 - 2017)</p>
-          <ul>
-              <li>Stored, retrieved, and manipulated data</li>
-              <li>Create scenario test</li>
-              <li>Functional testing</li>
-              <li>Integration testing</li>
-              <li>Create automation testing (API & UI)</li>
-              <li>Error analysis from log</li>
-              <li>Prepared detailed reports</li>
-              <li>Experience testing on retail, warehouse and blibli travel system</li>
-            </ul>
-      </div>
-    </div>
-    <div>
-        <p class="content content__title" style="display:inline-block">Skill</p>
-        <svg viewBox="0 0 450 2" class="content__title__line">
-            <rect class="line"></rect>
-        </svg>
-    </div>
-    <div>
-        <div class="content content__title content__title--red"></div>
-        <ul class="content content__text">
-            <li>Experien on use OOP, funtional and reactive programming</li>
-            <li>Understand SOLID concept</li>
-            <li>Troubleshooting and analytic skills</li>
-            <li>Design and develop REST API</li>
-            <li>Develop micro-service system</li>
-            <li>Experience on use JPA, MongoDB, Redis, Kafka and Rabbit Mq</li>
-            <li>Android development</li>
-            <li>Experience use Docker</li>
-            <li>Experience on TDD, BDD, CI/CD</li>
-            <li>Experience use Linux CLI</li>
+      <div class="grid grid__md-2 element-body element-body__text__title element-body__text__title--red">Software Engineer</div>
+      <div class="grid grid__md-8 element-body element-body__text__content">
+        <p class="element-body element-body__text__title--bold">Blibli.com (2017 - present)</p>
+        <ul>
+          <li>Work experience with the Spring Framework (core framework and Spring Boot)</li>
+          <li>Work experience with Spring Cloud</li>
+          <li>Working on agile team (Scrum)</li>
+          <li>Integrate api to third party payment gateway</li>
+          <li>Build system click and collect (buy online and pickup on store)</li>
+          <li>Build system for pre-order in blibli retail</li>
+          <li>Enhancement combine shipping system</li>
         </ul>
       </div>
-      <div>
-          <p class="content content__title" style="display:inline-block">Education</p>
-          <svg viewBox="0 0 450 2" class="content__title__line">
-              <rect class="line"></rect>
-          </svg>
+      <div class="grid grid__md-2 element-body element-body__text__title element-body__text__title--red">Quality Ansurance Engineer</div>
+      <div class="grid grid__md-8 element-body element-body__text__content">
+        <p class="element-body element-body__text__title--bold">Blibli.com (2016 - 2017)</p>
+        <ul>
+          <li>Stored, retrieved, and manipulated data</li>
+          <li>Create scenario test</li>
+          <li>Functional testing</li>
+          <li>Integration testing</li>
+          <li>Create automation testing (API & UI)</li>
+          <li>Error analysis from log</li>
+          <li>Prepared detailed reports</li>
+          <li>Experience testing on retail, warehouse and blibli travel system</li>
+        </ul>
       </div>
-      <div>
-          <div class="content content__title content__title--red">Bachelor Computer</div>
-          <p class="content  content__text content__title--bold">Brawijaya University Malang (2012 - 2016)</p>
-          </p>
-        </div>
+    </div>
   </div>
-  <div class="footer">
-      <svg viewBox="0 0 1000 5">
-          <rect class="line line__footer"></rect>
-        </svg>
+  <div class="skill separate">
+    <p class="grid grid__md-2 element-body element-body__text element-body__text__title" style="display:inline-block">Skill</p>
+    <div class="grid grid__md-8 element-body element-body__line"></div>
+    <div>
+      <div class="grid grid__md-2 element-body element-body__text__title element-body__text__title--red"></div>
+      <div class="grid grid__md-8 element-body element-body__text__content">
+        <ul>
+          <li>Experien on use OOP, funtional and reactive programming</li>
+          <li>Understand SOLID concept</li>
+          <li>Troubleshooting and analytic skills</li>
+          <li>Design and develop REST API</li>
+          <li>Develop micro-service system</li>
+          <li>Experience on use JPA, MongoDB, Redis, Kafka and Rabbit Mq</li>
+          <li>Android development</li>
+          <li>Experience use Docker</li>
+          <li>Experience on TDD, BDD, CI/CD</li>
+          <li>Experience use Linux CLI</li>
+        </ul>
+      </div>
+    </div>
   </div>
-   
+  <div class="education separate">
+    <p class="grid grid__md-2 element-body element-body__text__title" style="display:inline-block">Education</p>
+    <div class="grid grid__md-8 element-body element-body__line"></div>
+    <div>
+      <div class="grid grid__md-2 element-body element-body__text__title element-body__text__title--red">
+        Bachelor Computer
+      </div>
+      <div class="grid grid__md-8 element-body element-body__text__content">
+        <p class="element-body__text__title--bold">Brawijaya University Malang (2012 - 2016)</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer"></div>
 </body>
 </html>
