@@ -1,7 +1,7 @@
 # devc-basic-js
-Learn more about html, css and js basic with expert on devc community Jakarta.
+Learn more about basic html, css and js with expert on devc community Jakarta.
 
-[![screenshot cv](sc-cv.png "CV Online")](https://vendywira.github.io/devc-basic-js/src/index.html)
+[![screenshot cv](sc-cv.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/index.html)
 
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
@@ -17,4 +17,4 @@ sass --watch style.scss style.css
 for more detail about sass you can read their documentation at [sass guideline](https://sass-lang.com/guide)
 
 ## BEM (Block Element Modifiers)
-Convention for css class naming to more readable. For detail you can read on [bem official website](http://getbem.com/introduction/)
+Convention for class naming on css to readable. For more detail you can read on [bem official website](http://getbem.com/introduction/)
