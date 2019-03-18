@@ -1,7 +1,7 @@
 # devc-basic-js
 Learn more about html, css and js basic with expert on devc community Jakarta.
 
-![screenshot cv](sc-cv.png "Title")
+[![screenshot cv](sc-cv.png "CV Online")](https://vendywira.github.io/devc-basic-js/src/index.html)
 
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
