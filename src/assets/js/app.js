@@ -1,5 +1,7 @@
 const scientific = document.querySelector('.scientific')
-const display = document.querySelector('.calculator__display')
+const screen = document.querySelector('.calculator__display')
+let screenEmpty = true
+
 scientific.addEventListener('click', e => {
   if (e.target.classList.contains('button')) {
     const key = e.target
@@ -7,7 +9,15 @@ scientific.addEventListener('click', e => {
     console.log(key);
 
     if (!action) {
-      console.log('number key!')
+      const number = getTextContentElement(key)
+      // will execute when on screen print 0.
+      if (screenEmpty) {
+        screenEmpty = false;
+        setDisplay(number)
+      } else {
+        // add number and check validate number display start by zero
+        setDisplay(reduceZeroNumber(getDisplay() + number))
+      }
     }
 
     if (action) {
@@ -32,12 +42,37 @@ let actions = action => {
   }
 }
 
-let clear = () => {
+let setDisplay = displayText => {
+  screen.textContent = displayText
+}
 
+let getDisplay = () => {
+  return screen.textContent
+}
+
+let addDisplay = newText => {
+  screen.textContent += newText
+}
+
+let clear = () => {
+  screenEmpty = true
+  setDisplay('0.')
 }
 
 let del = () => {
+  setDisplay(getDisplay().slice(0, -1))
+  if (getDisplay().length === 0 ||
+    Number(getDisplay()) === 0) {
+    clear()
+  }
+}
 
+let getTextContentElement = e => {
+  return e.textContent
+}
+
+let reduceZeroNumber = numberText => {
+  return Number(numberText).toString()
 }
 
 let calculate = () => {
