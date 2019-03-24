@@ -2,10 +2,11 @@ const scientific = document.querySelector('.scientific')
 const screen = document.querySelector('.calculator__display')
 let screenEmpty = true
 let operator = null
-let lastNumber = null
-let firstNumber = null
+let displayNumber = null
+let displayNumberTemporary = null
 let operatorTemp = null
 let lastNumberTemp = null
+let isTypeSecondNumber = false
 
 scientific.addEventListener('click', e => {
   if (e.target.classList.contains('button')) {
@@ -14,6 +15,9 @@ scientific.addEventListener('click', e => {
 
     if (!action) {
       const number = getTextContentElement(key)
+      if (displayNumber === null && displayNumberTemporary !== null) {
+        isTypeSecondNumber = true
+      }
       // will execute when on screen print 0.
       if (screenEmpty) {
         screenEmpty = false;
@@ -46,69 +50,67 @@ let actions = action => {
       setDisplayScreen(Math.PI)
       break
     case 'plus-min':
-      lastNumber = plusMin(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = plusMin(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'percent':
-      lastNumber = percent(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = percent(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'ln':
-      lastNumber = ln(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = ln(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'sqr':
-      lastNumber = sqr(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = sqr(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'sqrt':
-      lastNumber = sqrt(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = sqrt(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'sin':
-      lastNumber = sin(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = sin(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'cos':
-      lastNumber = cos(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = cos(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'tan':
-      lastNumber = tan(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = tan(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'factorialize':
-      lastNumber = factorialize(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = factorialize(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     case 'abs':
-      lastNumber = abs(Number(getDisplayScreen()))
-      setDisplayScreen(lastNumber)
+      displayNumber = abs(Number(getDisplayScreen()))
+      setDisplayScreen(displayNumber)
       break
     default:
-      /**
-       *  when click same operator without input second number
-       *  will use the last number for calculation
-       */
-      if (operatorTemp === operator) {
-        lastNumber = lastNumberTemp
+      if (!isTypeSecondNumber && operator !== null) {
+        displayNumber = netralNumber(operator)
       }
 
       // will get lastNumber from screen when initialize data
-      if (lastNumber === null) {
-        lastNumber = Number(getDisplayScreen())
+      if (displayNumber === null) {
+        displayNumber = Number(getDisplayScreen())
       }
 
-      calculate(firstNumber, lastNumber, operator)
-      if (lastNumber !== null) {
-        setDisplayScreen(lastNumber)
-        firstNumber = lastNumber
-        lastNumber = null
+      calculate(displayNumberTemporary, displayNumber, operator)
+      if (displayNumber !== null) {
+        setDisplayScreen(displayNumber)
+        displayNumberTemporary = displayNumber
+        isTypeSecondNumber = false
+        displayNumber = null
+        operator = null
       }
       if (action !== 'equal') {
         operator = action;
       }
-      console.log(`condition: ${firstNumber} ${operator} ${lastNumber}`);
+      console.log(`condition: ${displayNumberTemporary} ${operator} ${displayNumber}`);
       break
   }
 
@@ -134,32 +136,30 @@ let calculate = (n1, n2, operator) => {
   if (n1 !== null && operator !== null) {
     switch (operator) {
       case 'add':
-        lastNumber = add(n1, n2)
+        displayNumber = add(n1, n2)
         break
       case 'subtract':
-        lastNumber = subtract(n1, n2)
+        displayNumber = subtract(n1, n2)
         break
       case 'multiply':
-        lastNumber = multiply(n1, n2)
+        displayNumber = multiply(n1, n2)
         break
       case 'divide':
-        lastNumber = divide(n1, n2)
+        displayNumber = divide(n1, n2)
         break
       case 'exp':
-        lastNumber = exp(n1, n2)
+        displayNumber = exp(n1, n2)
         break
     }
   }
-  lastNumberTemp = n2
-  operatorTemp = operator
   console.log(`${n1} ${operator} ${n2}`);
 }
 
 let clear = () => {
   setDisplayScreen('0.')
   screenEmpty = true
-  firstNumber = null
-  lastNumber = null
+  displayNumberTemporary = null
+  displayNumber = null
   lastNumberTemp = null
   operator = null
 }
@@ -246,4 +246,11 @@ let factorialize = n1 => {
   } else {
     return (n1 * factorialize(n1 - 1))
   }
+}
+
+let netralNumber = operator => {
+  if (operator == 'add' || operator == 'subtract') {
+    return 0
+  }
+  return 1
 }

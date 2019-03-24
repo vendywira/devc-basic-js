@@ -40,10 +40,11 @@
 
 .button {
   padding: 2%;
-  height: 5%;
   color: white;
-  margin: 1%;
+  margin: 0.2%;
   text-align: center;
+  border-radius: 30%;
+  font-size: 1vw;
 }
 .button--red {
   background: #e03939;
@@ -52,7 +53,7 @@
   background: #000;
 }
 .button--orange {
-  background: #ff4561;
+  background: #f89b22;
 }
 .button--grey {
   background: grey;
