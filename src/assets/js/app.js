@@ -30,6 +30,8 @@ scientific.addEventListener('click', e => {
 })
 
 let actions = action => {
+  number1 = Number(getDisplay())
+
   switch (action) {
     case 'clear':
       clear()
@@ -43,6 +45,35 @@ let actions = action => {
     case 'phi':
       addDisplay(Math.PI)
       break
+    case 'plus-min':
+      setDisplay(plusMin(number1))
+      break
+    case 'percent':
+      setDisplay(percent(number1))
+      break
+    case 'ln':
+      setDisplay(ln(number1))
+      break
+    case 'sqr':
+      setDisplay(sqr(number1))
+      break
+    case 'sqrt':
+      setDisplay(sqrt(number1))
+      break
+    case 'sin':
+      setDisplay(sin(number1))
+      break
+    case 'cos':
+      setDisplay(cos(number1))
+      break
+    case 'tan':
+      setDisplay(tan(number1))
+      break
+  }
+
+  // set display not concat the next number
+  if (action !== 'del') {
+    screenEmpty = true
   }
 }
 
@@ -59,8 +90,8 @@ let addDisplay = newText => {
 }
 
 let clear = () => {
-  screenEmpty = true
   setDisplay('0.')
+  screenEmpty = true
 }
 
 let del = () => {
@@ -104,7 +135,8 @@ let exponent = (n1, n2) => {
 }
 
 let ln = n1 => {
-  return Math.ln(n1)
+  result = Math.log(n1)
+  return isNaN(result) ? 0 : result
 }
 
 let sqrt = n1 => {
@@ -129,8 +161,4 @@ let tan = n1 => {
 
 let plusMin = n1 => {
   return n1 * -1
-}
-
-let calculate = (n1, operator, number2) => {
-
 }
