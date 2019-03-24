@@ -4,7 +4,6 @@ let screenEmpty = true
 let operator = null
 let displayNumber = null
 let displayNumberTemporary = null
-let operatorTemp = null
 let lastNumberTemp = null
 let isTypeSecondNumber = false
 
@@ -130,10 +129,6 @@ let setDisplayScreen = displayText => {
 
 let getDisplayScreen = () => {
   return screen.textContent
-}
-
-let appendDisplayScreen = appendText => {
-  screen.textContent += appendText
 }
 
 let calculate = (n1, n2, operator) => {

@@ -79,6 +79,15 @@ $butoonSize: 90/5;
   }
 }
 
+.body {
+  background-image: linear-gradient(to bottom right, rgb(42, 155, 248), rgb(230, 230, 221));
+}
+
+.scientific {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
 .calculator {
   border-radius: 20px;
   background-color: rgb(235, 234, 209);
