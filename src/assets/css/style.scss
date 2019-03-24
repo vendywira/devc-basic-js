@@ -62,6 +62,10 @@ $butoonSize: 90/5;
   padding-top: 3%;
   padding-bottom: 3%;
 
+  &:active {
+    background-color: white;
+  }
+
   &--red {
     background: rgb(224, 57, 57);
   }
