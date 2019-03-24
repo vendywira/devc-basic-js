@@ -1,9 +1,9 @@
 const scientific = document.querySelector('.scientific')
 const screen = document.querySelector('.calculator__display')
 let screenEmpty = true
-let operator = null;
-let number1 = 0
-let number2 = 0
+let operator = null
+let lastNumber = null
+let firstNumber = null
 
 scientific.addEventListener('click', e => {
   if (e.target.classList.contains('button')) {
@@ -30,45 +30,59 @@ scientific.addEventListener('click', e => {
 })
 
 let actions = action => {
-  number1 = Number(getDisplay())
+  lastNumber = Number(getDisplay())
 
   switch (action) {
     case 'clear':
       clear()
       break
-    case 'equal':
-      calculate()
-      break
     case 'del':
       del()
       break
     case 'phi':
-      addDisplay(Math.PI)
+      setDisplay(Math.PI)
       break
     case 'plus-min':
-      setDisplay(plusMin(number1))
+      setDisplay(plusMin(lastNumber))
       break
     case 'percent':
-      setDisplay(percent(number1))
+      setDisplay(percent(lastNumber))
       break
     case 'ln':
-      setDisplay(ln(number1))
+      setDisplay(ln(lastNumber))
       break
     case 'sqr':
-      setDisplay(sqr(number1))
+      setDisplay(sqr(lastNumber))
       break
     case 'sqrt':
-      setDisplay(sqrt(number1))
+      setDisplay(sqrt(lastNumber))
       break
     case 'sin':
-      setDisplay(sin(number1))
+      setDisplay(sin(lastNumber))
       break
     case 'cos':
-      setDisplay(cos(number1))
+      setDisplay(cos(lastNumber))
       break
     case 'tan':
-      setDisplay(tan(number1))
+      setDisplay(tan(lastNumber))
       break
+    case 'factorialize':
+      setDisplay(factorilize(lastNumber))
+      break
+    case 'abs':
+      setDisplay(factorilize(lastNumber))
+      break
+    default:
+      if (action !== 'equal') {
+        operator = action;
+      }
+      let result = calculate(firstNumber, lastNumber, operator)
+      console.log(result);
+      if (typeof result !== 'undefined' && result !== null) {
+        setDisplay(result)
+      }
+      break
+
   }
 
   // set display not concat the next number
@@ -92,6 +106,8 @@ let addDisplay = newText => {
 let clear = () => {
   setDisplay('0.')
   screenEmpty = true
+  firstNumber = null
+  lastNumber = null
 }
 
 let del = () => {
@@ -130,7 +146,7 @@ let percent = n1 => {
   return n1 / 100
 }
 
-let exponent = (n1, n2) => {
+let exp = (n1, n2) => {
   return Math.pow(n1, n2)
 }
 
@@ -161,4 +177,39 @@ let tan = n1 => {
 
 let plusMin = n1 => {
   return n1 * -1
+}
+
+let abs = n1 => {
+  return Math.abs(n1)
+}
+
+let factorilize = n1 => {
+  if (n1 < 0) {
+    return -1;
+  } else if (n1 == 0) {
+    return 1;
+  } else {
+    return (n1 * factorialize(n1 - 1))
+  }
+}
+
+let calculate = (n1, n2, operator) => {
+  if (n1 !== null && operator !== null) {
+    switch (operator) {
+      case 'add':
+        return add(n1, n2)
+      case 'substract':
+        return subtract(n1, n2)
+      case 'multiply':
+        return multiply(n1, n2)
+      case 'divide':
+        return divide(n1, n2)
+      case 'exp':
+        return exp(n1, n2)
+      default:
+        return null;
+    }
+  }
+  firstNumber = lastNumber;
+  lastNumber = 0
 }
