@@ -4,22 +4,27 @@ let screenEmpty = true
 let operator = null
 let lastNumber = null
 let firstNumber = null
+let operatorTemp = null
+let lastNumberTemp = null
 
 scientific.addEventListener('click', e => {
   if (e.target.classList.contains('button')) {
     const key = e.target
     const action = key.getAttribute('action');
-    console.log(key);
 
     if (!action) {
       const number = getTextContentElement(key)
       // will execute when on screen print 0.
       if (screenEmpty) {
         screenEmpty = false;
-        setDisplay(number)
+        setDisplayScreen(number)
       } else {
         // add number and check validate number display start by zero
-        setDisplay(reduceZeroNumber(getDisplay() + number))
+        if (number === ".") {
+          setDisplayScreen(getDisplayScreen() + number)
+        } else {
+          setDisplayScreen(reduceZeroNumber(getDisplayScreen() + number))
+        }
       }
     }
 
@@ -30,8 +35,6 @@ scientific.addEventListener('click', e => {
 })
 
 let actions = action => {
-  lastNumber = Number(getDisplay())
-
   switch (action) {
     case 'clear':
       clear()
@@ -40,80 +43,132 @@ let actions = action => {
       del()
       break
     case 'phi':
-      setDisplay(Math.PI)
+      setDisplayScreen(Math.PI)
       break
     case 'plus-min':
-      setDisplay(plusMin(lastNumber))
+      lastNumber = plusMin(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'percent':
-      setDisplay(percent(lastNumber))
+      lastNumber = percent(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'ln':
-      setDisplay(ln(lastNumber))
+      lastNumber = ln(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'sqr':
-      setDisplay(sqr(lastNumber))
+      lastNumber = sqr(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'sqrt':
-      setDisplay(sqrt(lastNumber))
+      lastNumber = sqrt(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'sin':
-      setDisplay(sin(lastNumber))
+      lastNumber = sin(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'cos':
-      setDisplay(cos(lastNumber))
+      lastNumber = cos(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'tan':
-      setDisplay(tan(lastNumber))
+      lastNumber = tan(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'factorialize':
-      setDisplay(factorilize(lastNumber))
+      lastNumber = factorialize(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     case 'abs':
-      setDisplay(factorilize(lastNumber))
+      lastNumber = abs(Number(getDisplayScreen()))
+      setDisplayScreen(lastNumber)
       break
     default:
+      /**
+       *  when click same operator without input second number
+       *  will use the last number for calculation
+       */
+      if (operatorTemp === operator) {
+        lastNumber = lastNumberTemp
+      }
+
+      // will get lastNumber from screen when initialize data
+      if (lastNumber === null) {
+        lastNumber = Number(getDisplayScreen())
+      }
+
+      calculate(firstNumber, lastNumber, operator)
+      if (lastNumber !== null) {
+        setDisplayScreen(lastNumber)
+        firstNumber = lastNumber
+        lastNumber = null
+      }
       if (action !== 'equal') {
         operator = action;
       }
-      let result = calculate(firstNumber, lastNumber, operator)
-      console.log(result);
-      if (typeof result !== 'undefined' && result !== null) {
-        setDisplay(result)
-      }
+      console.log(`condition: ${firstNumber} ${operator} ${lastNumber}`);
       break
-
   }
 
-  // set display not concat the next number
+  // set display disable append the next number
   if (action !== 'del') {
     screenEmpty = true
   }
 }
 
-let setDisplay = displayText => {
+let setDisplayScreen = displayText => {
   screen.textContent = displayText
 }
 
-let getDisplay = () => {
+let getDisplayScreen = () => {
   return screen.textContent
 }
 
-let addDisplay = newText => {
-  screen.textContent += newText
+let appendDisplayScreen = appendText => {
+  screen.textContent += appendText
+}
+
+let calculate = (n1, n2, operator) => {
+  if (n1 !== null && operator !== null) {
+    switch (operator) {
+      case 'add':
+        lastNumber = add(n1, n2)
+        break
+      case 'subtract':
+        lastNumber = subtract(n1, n2)
+        break
+      case 'multiply':
+        lastNumber = multiply(n1, n2)
+        break
+      case 'divide':
+        lastNumber = divide(n1, n2)
+        break
+      case 'exp':
+        lastNumber = exp(n1, n2)
+        break
+    }
+  }
+  lastNumberTemp = n2
+  operatorTemp = operator
+  console.log(`${n1} ${operator} ${n2}`);
 }
 
 let clear = () => {
-  setDisplay('0.')
+  setDisplayScreen('0.')
   screenEmpty = true
   firstNumber = null
   lastNumber = null
+  lastNumberTemp = null
+  operator = null
 }
 
 let del = () => {
-  setDisplay(getDisplay().slice(0, -1))
-  if (getDisplay().length === 0 ||
-    Number(getDisplay()) === 0) {
+  setDisplayScreen(getDisplayScreen().slice(0, -1))
+  if (getDisplayScreen().length === 0 ||
+    Number(getDisplayScreen()) === 0 ||
+    screenEmpty) {
     clear()
   }
 }
@@ -131,7 +186,7 @@ let add = (n1, n2) => {
 }
 
 let subtract = (n1, n2) => {
-  return n2 - n1
+  return n1 - n2
 }
 
 let multiply = (n1, n2) => {
@@ -183,7 +238,7 @@ let abs = n1 => {
   return Math.abs(n1)
 }
 
-let factorilize = n1 => {
+let factorialize = n1 => {
   if (n1 < 0) {
     return -1;
   } else if (n1 == 0) {
@@ -191,25 +246,4 @@ let factorilize = n1 => {
   } else {
     return (n1 * factorialize(n1 - 1))
   }
-}
-
-let calculate = (n1, n2, operator) => {
-  if (n1 !== null && operator !== null) {
-    switch (operator) {
-      case 'add':
-        return add(n1, n2)
-      case 'substract':
-        return subtract(n1, n2)
-      case 'multiply':
-        return multiply(n1, n2)
-      case 'divide':
-        return divide(n1, n2)
-      case 'exp':
-        return exp(n1, n2)
-      default:
-        return null;
-    }
-  }
-  firstNumber = lastNumber;
-  lastNumber = 0
 }
