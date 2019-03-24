@@ -1,18 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
-@import url('https://fonts.googleapis.com/css?family=Raleway');
-
-// color
-$red : #c2331a !default;
-$black : #000 !default;
-
-// font
-$raleway : "Raleway",
-sans-serif;
-$robotoCondesed: "Roboto Condensed",
-sans-serif;
-
-
 $singleGrid: 100/12;
+$butoonSize: 90/5;
 
 .grid {
   &__md-1 {
@@ -65,12 +52,15 @@ $singleGrid: 100/12;
 }
 
 .button {
-  padding: 2%;
+  padding: 0.1%;
   color: white;
-  margin: 0.2%;
+  margin: 0.25%;
   text-align: center;
   border-radius: 30%;
-  font-size: 1vw;
+  font-size: 2.5vw;
+  width: $butoonSize*1%;
+  padding-top: 3%;
+  padding-bottom: 3%;
 
   &--red {
     background: rgb(224, 57, 57);
@@ -89,9 +79,24 @@ $singleGrid: 100/12;
   }
 }
 
+.calculator {
+  border-radius: 20px;
+  background-color: rgb(235, 234, 209);
+  margin: 0 auto;
+  margin: auto;
+  padding-bottom: 5%;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  padding-top: 2%;
+}
+
 .calculator__display {
-  height: 50%;
-  background-color: black;
-  color: greenyellow;
+  padding: 20px;
+  line-height: 50px;
+  border-radius: 20px;
   text-align: right;
+  color: white;
+  font-size: 2.5vw;
+  background-color: #000;
+  margin-bottom: 20px;
 }

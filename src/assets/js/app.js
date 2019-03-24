@@ -47,7 +47,11 @@ let actions = action => {
       del()
       break
     case 'phi':
-      setDisplayScreen(Math.PI)
+      if (displayNumber === null && displayNumberTemporary !== null) {
+        isTypeSecondNumber = true
+      }
+      displayNumber = Math.PI
+      setDisplayScreen(displayNumber)
       break
     case 'plus-min':
       displayNumber = plusMin(Number(getDisplayScreen()))
