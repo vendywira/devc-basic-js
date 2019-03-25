@@ -4,40 +4,50 @@ let screenEmpty = true
 let operator = null
 let displayNumber = null
 let displayNumberTemporary = null
-let lastNumberTemp = null
-let isTypeSecondNumber = false
+let secondaryNumberTemp = null
+let isTypeSecondaryNumber = false
 
 scientific.addEventListener('click', e => {
   if (e.target.classList.contains('button')) {
     const key = e.target
     const action = key.getAttribute('action');
-
     if (!action) {
-      const number = getTextContentElement(key)
-      if (displayNumber === null && displayNumberTemporary !== null) {
-        isTypeSecondNumber = true
-      }
-      // will execute when on screen print 0.
-      if (screenEmpty) {
-        screenEmpty = false;
-        setDisplayScreen(number)
-      } else {
-        // add number and check validate number display start by zero
-        if (number === ".") {
-          setDisplayScreen(getDisplayScreen() + number)
-        } else {
-          setDisplayScreen(reduceZeroNumber(getDisplayScreen() + number))
-        }
-      }
-    }
-
-    if (action) {
-      actions(action)
+      typeNumber(getTextContentElement(key))
+    } else {
+      calculateOperation(action)
     }
   }
 })
 
-let actions = action => {
+let typeNumber = number => {
+  if (displayNumber === null && displayNumberTemporary !== null) {
+    isTypeSecondaryNumber = true
+  }
+  // will execute when on screen print clear
+  if (screenEmpty) {
+    screenEmpty = false;
+    if (number === ".") {
+      appendDisplayScreen(number)
+    } else {
+      setDisplayScreen(number)
+    }
+  } else {
+    // validation for add . only 1
+    if (number === "." && !getDisplayScreen().includes(".")) {
+      appendDisplayScreen(number)
+    } else if (number !== ".") {
+      // allow 0 if the number is decimal
+      if (getDisplayScreen().includes(".")) {
+        appendDisplayScreen(number)
+      } else {
+        // add number and check validate number display start by zero
+        setDisplayScreen(validateRightNumber(getDisplayScreen() + number))
+      }
+    }
+  }
+}
+
+let calculateOperation = action => {
   switch (action) {
     case 'clear':
       clear()
@@ -47,7 +57,7 @@ let actions = action => {
       break
     case 'phi':
       if (displayNumber === null && displayNumberTemporary !== null) {
-        isTypeSecondNumber = true
+        isTypeSecondaryNumber = true
       }
       displayNumber = Math.PI
       setDisplayScreen(displayNumber)
@@ -93,7 +103,7 @@ let actions = action => {
       setDisplayScreen(displayNumber)
       break
     default:
-      if (!isTypeSecondNumber && operator !== null) {
+      if (!isTypeSecondaryNumber && operator !== null) {
         displayNumber = netralNumber(operator)
       }
 
@@ -106,7 +116,7 @@ let actions = action => {
       if (displayNumber !== null) {
         setDisplayScreen(displayNumber)
         displayNumberTemporary = displayNumber
-        isTypeSecondNumber = false
+        isTypeSecondaryNumber = false
         displayNumber = null
         operator = null
       }
@@ -125,6 +135,10 @@ let actions = action => {
 
 let setDisplayScreen = displayText => {
   screen.textContent = displayText
+}
+
+let appendDisplayScreen = displayText => {
+  screen.textContent += displayText
 }
 
 let getDisplayScreen = () => {
@@ -155,7 +169,7 @@ let calculate = (n1, n2, operator) => {
 }
 
 let clear = () => {
-  setDisplayScreen('0.')
+  setDisplayScreen('0')
   screenEmpty = true
   displayNumberTemporary = null
   displayNumber = null
@@ -176,7 +190,7 @@ let getTextContentElement = e => {
   return e.textContent
 }
 
-let reduceZeroNumber = numberText => {
+let validateRightNumber = numberText => {
   return Number(numberText).toString()
 }
 
@@ -240,7 +254,7 @@ let abs = n1 => {
 let factorialize = n1 => {
   if (n1 < 0) {
     return -1;
-  } else if (n1 == 0) {
+  } else if (n1 === 0) {
     return 1;
   } else {
     return (n1 * factorialize(n1 - 1))
@@ -248,7 +262,7 @@ let factorialize = n1 => {
 }
 
 let netralNumber = operator => {
-  if (operator == 'add' || operator == 'subtract') {
+  if (operator === 'add' || operator === 'subtract') {
     return 0
   }
   return 1
