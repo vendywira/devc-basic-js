@@ -63,7 +63,7 @@
   background: grey;
 }
 
-.body {
+body {
   background-image: linear-gradient(to bottom right, #2a9bf8, #e6e6dd);
 }
 
