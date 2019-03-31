@@ -2,7 +2,7 @@
  * @author vendywira
  * this helper will help you to simplifiying dom manipulation
  * this helper work like jquery
- * import this library on your code and create class instant
+ * import this library on your code and create class instant and you can use the function
  */
 
 class DOMHelper {
@@ -11,9 +11,16 @@ class DOMHelper {
     this._documentSelector = null
   }
 
-  document(querySelector) {
-    this._documentSelector = document.querySelector(querySelector)
-    return this
+  static el(querySelector) {
+    let el = new DOMHelper
+    el._documentSelector = document.querySelector(querySelector)
+    return el._documentSelector
+  }
+
+  static action(querySelector) {
+    let el = new DOMHelper
+    el._documentSelector = document.querySelector(querySelector)
+    return el
   }
 
   click(func) {
