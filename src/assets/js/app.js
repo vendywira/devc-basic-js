@@ -72,85 +72,81 @@ let loading = isShow => {
   }
 }
 
-let filterByName = searchText => {
-  return _planets
+let filterByName = (searchText, planets) => {
+  return planets
     .filter(planet => planet.name.toLowerCase().trim()
       .includes(searchText.toLowerCase().trim()));
 }
 
-let filterByRotation = searchText => {
-  return _planets
+let filterByRotation = (searchText, planets) => {
+  return planets
     .filter(planet => planet.rotation_period.toLowerCase().trim()
       .includes(searchText.toLowerCase().trim()));
 }
 
-let filterByOrbital = searchText => {
-  return _planets
+let filterByOrbital = (searchText, planets) => {
+  return planets
     .filter(planet => planet.orbital_period.toLowerCase().trim()
       .includes(searchText.toLowerCase().trim()));
 }
 
-let filterByDiameter = searchText => {
-  return _planets
+let filterByDiameter = (searchText, planets) => {
+  return planets
     .filter(planet => planet.diameter.toLowerCase().trim()
       .includes(searchText.toLowerCase().trim()));
 }
 
-let filterByClimate = searchText => {
-  return _planets
+let filterByClimate = (searchText, planets) => {
+  return planets
     .filter(planet => planet.climate.toLowerCase().trim()
       .includes(searchText.toLowerCase().trim()));
 }
 
-let filterByAll = searchText => {
-  let filteredItems = filterByName(searchText)
-    .concat(filterByRotation(searchText))
-    .concat(filterByOrbital(searchText))
-    .concat(filterByDiameter(searchText))
-    .concat(filterByClimate(searchText))
+let filterByAll = (searchText, planets) => {
+  let filteredItems = filterByName(searchText, planets)
+    .concat(filterByRotation(searchText, planets))
+    .concat(filterByOrbital(searchText, planets))
+    .concat(filterByDiameter(searchText, planets))
+    .concat(filterByClimate(searchText, planets))
 
-  let planets = []
+  let finalFilteredItems = []
   filteredItems.forEach(planet => {
-    filterUniquePlanet(planet, planets)
+    filterUniquePlanet(planet, finalFilteredItems)
   })
 
-  return planets
+  return finalFilteredItems
 }
 
 let filterBy = (searchText, by) => {
-  let planets = []
+  let planets = _pages.flatMap(page => page.results)
+  console.log(planets);
   content.innerHTML = ""
   switch (by) {
     case 'name':
-      planets = filterByName(searchText)
+      planets = filterByName(searchText, planets)
       break
     case 'rotation':
-      planets = filterByRotation(searchText)
+      planets = filterByRotation(searchText, planets)
       break
     case 'orbital':
-      planets = filterByOrbital(searchText)
+      planets = filterByOrbital(searchText, planets)
       break
     case 'diameter':
-      planets = filterByDiameter(searchText)
+      planets = filterByDiameter(searchText, planets)
       break
     case 'climate':
-      planets = filterByClimate(searchText)
+      planets = filterByClimate(searchText, planets)
       break
     default:
-      planets = filterByAll(searchText)
+      planets = filterByAll(searchText, planets)
+      console.log(planets);
       break
   }
-  planets.forEach(e => content.innerHTML += listView.render(e))
+  planets.slice(0, 10).forEach(e => content.innerHTML += listView.render(e))
 }
 
 let _pushAtIndex = (index, arr, obj) => {
   arr[index] = obj
-}
-
-let _popAtIndex = (index, arr) => {
-  if (arr.length > index) {
-    arr.splice(index, 1);
-  }
 }
 
 let _getPage = url => {
