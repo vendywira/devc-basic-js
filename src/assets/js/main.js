@@ -1,25 +1,31 @@
-import HttpLib from "./httplib.js"
-import DOMHelper from "./dom-helper.js"
 import Navigate from "./navigate.js"
-import Planet from "./Planet.js"
+import Planet from "./planet.js"
+import Loading from "./loading.js"
 
-const http = new HttpLib
-let $ = DOMHelper
 let url = "https://swapi.co/api/planets/?page=1"
 
-let loadContent = async () => {
-  let content = await Planet.method.getPlanets(url)
+let state = {
+
+}
+
+let loadPlanet = async url => {
+  Planet.data.url = url
+  await Planet.method.getPlanets()
+}
+
+let loadNavigate = () => {
+  Navigate.render()
+}
+
+let loading = () => {
+  Loading.render()
 }
 
 window.addEventListener('load', () => {
-  $.document(Navigate.name).replace(Navigate.template)
-  loadContent()
+  loading()
+  loadNavigate()
+  loadPlanet(url)
 });
-
-const loadingEl = null || $.el('#loading')
-
-let urlNext, urlPrev, pageCount
-let _pages = []
 
 let getPlanets = url => http.get(url)
   .then(response => {
@@ -47,114 +53,15 @@ let loadDataToTable = response => {
   loading(false)
 }
 
-let listView = {
-  render: planet => {
-    let template = `
-        <ul class="content content__list" id="content-list">
-          <li>name: ${planet.name}</li>
-          <li>rotation period: ${planet.rotation_period}</li>
-          <li>orbital period: ${planet.orbital_period}</li>
-          <li>diameter: ${planet.diameter}</li>
-          <li>climate: ${planet.climate}</li>
-        </ul>`
-    return template
-  }
-}
-
 let filterUniquePlanet = (planet, planets) => {
   if (!planets.includes(planet)) {
     planets.push(planet)
   }
 }
 
-let loading = isShow => {
-  if (isShow) {
-    loadingEl.style.display = 'block';
-  } else {
-    loadingEl.style.display = 'none';
-  }
-}
-
-let filterByName = (searchText, planets) => {
-  return planets
-    .filter(planet => planet.name.toLowerCase().trim()
-      .includes(searchText.toLowerCase().trim()));
-}
-
-let filterByRotation = (searchText, planets) => {
-  return planets
-    .filter(planet => planet.rotation_period.toLowerCase().trim()
-      .includes(searchText.toLowerCase().trim()));
-}
-
-let filterByOrbital = (searchText, planets) => {
-  return planets
-    .filter(planet => planet.orbital_period.toLowerCase().trim()
-      .includes(searchText.toLowerCase().trim()));
-}
-
-let filterByDiameter = (searchText, planets) => {
-  return planets
-    .filter(planet => planet.diameter.toLowerCase().trim()
-      .includes(searchText.toLowerCase().trim()));
-}
-
-let filterByClimate = (searchText, planets) => {
-  return planets
-    .filter(planet => planet.climate.toLowerCase().trim()
-      .includes(searchText.toLowerCase().trim()));
-}
-
-let filterByAll = (searchText, planets) => {
-  let filteredItems = filterByName(searchText, planets)
-    .concat(filterByRotation(searchText, planets))
-    .concat(filterByOrbital(searchText, planets))
-    .concat(filterByDiameter(searchText, planets))
-    .concat(filterByClimate(searchText, planets))
-
-  let finalFilteredItems = []
-  filteredItems.forEach(planet => {
-    filterUniquePlanet(planet, finalFilteredItems)
-  })
-
-  return finalFilteredItems
-}
-
-let filterBy = (searchText, by) => {
-  let planets = _pages.flatMap(page => page.results)
-  console.log(planets);
-  content.innerHTML = ""
-  switch (by) {
-    case 'name':
-      planets = filterByName(searchText, planets)
-      break
-    case 'rotation':
-      planets = filterByRotation(searchText, planets)
-      break
-    case 'orbital':
-      planets = filterByOrbital(searchText, planets)
-      break
-    case 'diameter':
-      planets = filterByDiameter(searchText, planets)
-      break
-    case 'climate':
-      planets = filterByClimate(searchText, planets)
-      break
-    default:
-      planets = filterByAll(searchText, planets)
-      console.log(planets);
-      break
-  }
-  planets.slice(0, 10).forEach(e => content.innerHTML += listView.render(e))
-}
-
-let _pushAtIndex = (index, arr, obj) => {
-  arr[index] = obj
-}
-
-let _getPage = url => {
-  return Number(url.split("page=")[1])
-}
+// let loading = isShow => {
+//   
+// }
 
 // $.document('#filter').keyUp(() => {
 //   let searchText = $.el('#filter').value

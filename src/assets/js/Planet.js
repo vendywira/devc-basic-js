@@ -6,10 +6,6 @@ let $ = DOMHelper
 
 let Planet = {
   name: 'planet',
-  data: {
-
-  },
-
   template: (planets) => {
     let view = ""
     planets.forEach(planet => {
@@ -24,17 +20,27 @@ let Planet = {
     return `<div class="page page__content" id="content">${view}</div>`
   },
 
+  data: {
+    url: "",
+    response: {
+      count: 0,
+      next: "",
+      previous: "",
+      results: []
+    }
+  },
+
   method: {
-    getPlanets: url => http.get(url)
+    getPlanets: () => http.get(Planet.data.url)
       .then(response => {
-        response.url = url
-        Planet.render(response)
+        Planet.data.response = response
+        Planet.render(Planet.data)
       })
       .catch(err => console.log(err)),
   },
 
-  render: response => {
-    let view = Planet.template(response.results)
+  render: data => {
+    let view = Planet.template(data.response.results)
     $.document(Planet.name).replace(view)
   }
 }

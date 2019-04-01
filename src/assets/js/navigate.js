@@ -1,63 +1,65 @@
-// import DOMHelper from "./dom-helper.js"
-// import HttpLib from "./httplib.js"
-// const $ = DOMHelper
-// const http = new HttpLib
+import DOMHelper from "./dom-helper.js"
+const $ = DOMHelper
 
 let Navigate = {
   name: 'navigate',
+  template: `
+    <input type="text" id="filter">
+    <button id="prev">prev</button>
+    <button id="next">next</button>
+  `,
+
   data: {
-    url: "https://swapi.co/api/planets/?page=1",
+    url: "",
     next: "",
     prev: "",
-    page: 1
+    page: 1,
+    pages: [],
+    filterBy: "",
+    searchText: "",
+    planets: []
   },
-
-  template: `
-      <input type="text" id="filter">
-      <button id="prev">prev</button>
-      <button id="next">next</button>
-      `,
 
   method: {
     _pushAtIndex: (index, arr, obj) => {
       arr[index] = obj
     },
 
-    _getPage: url => {
-      return Number(url.split("page=")[1])
+    _getPage: () => {
+      return Number(Navigate.data.url.split("page=")[1])
     },
 
-    filterByName: (searchText, planets) => {
+    _filterByName: (searchText, planets) => {
       return planets
         .filter(planet => planet.name.toLowerCase().trim()
           .includes(searchText.toLowerCase().trim()));
     },
 
-    filterByRotation: (searchText, planets) => {
+    _filterByRotation: (searchText, planets) => {
       return planets
         .filter(planet => planet.rotation_period.toLowerCase().trim()
           .includes(searchText.toLowerCase().trim()));
     },
 
-    filterByOrbital: (searchText, planets) => {
+    _filterByOrbital: (searchText, planets) => {
       return planets
         .filter(planet => planet.orbital_period.toLowerCase().trim()
           .includes(searchText.toLowerCase().trim()));
     },
 
-    filterByDiameter: (searchText, planets) => {
+    _filterByDiameter: (searchText, planets) => {
       return planets
         .filter(planet => planet.diameter.toLowerCase().trim()
           .includes(searchText.toLowerCase().trim()));
     },
 
-    filterByClimate: (searchText, planets) => {
+    _filterByClimate: (searchText, planets) => {
       return planets
         .filter(planet => planet.climate.toLowerCase().trim()
           .includes(searchText.toLowerCase().trim()));
     },
 
-    filterByAll: (searchText, planets) => {
+    _filterByAll: (searchText, planets) => {
       let filteredItems = filterByName(searchText, planets)
         .concat(filterByRotation(searchText, planets))
         .concat(filterByOrbital(searchText, planets))
@@ -72,7 +74,9 @@ let Navigate = {
       return finalFilteredItems
     },
 
-    filterBy: (searchText, by) => {
+    filterBy: () => {
+      let searchText = Navigate.data.searchText
+      let by = Navigate.data.filterBy
       let planets = _pages.flatMap(page => page.results)
       console.log(planets);
       content.innerHTML = ""
@@ -97,7 +101,7 @@ let Navigate = {
           console.log(planets);
           break
       }
-      planets.slice(0, 10).forEach(e => content.innerHTML += listView.render(e))
+      return planets.slice(0, 10)
     },
 
     loadResource: url => {
@@ -115,6 +119,10 @@ let Navigate = {
       }
       console.log(_pages);
     },
+  },
+
+  render: () => {
+    $.document(Navigate.name).replace(Navigate.template)
   }
 }
 
