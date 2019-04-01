@@ -19,7 +19,11 @@ class DOMHelper {
 
   static document(querySelector) {
     let el = new DOMHelper
-    el._documentSelector = document.querySelector(querySelector)
+    if (typeof querySelector === 'object') {
+      el._documentSelector = querySelector
+    } else {
+      el._documentSelector = document.querySelector(querySelector)
+    }
     return el
   }
 
@@ -28,6 +32,8 @@ class DOMHelper {
       let element = document.createElement('div')
       element.innerHTML = el
       this._documentSelector.parentNode.replaceChild(element, this._documentSelector)
+      this._documentSelector = element
+      return this._documentSelector
     } catch (e) {
       console.log(`Warning: ${e}`);
     }
