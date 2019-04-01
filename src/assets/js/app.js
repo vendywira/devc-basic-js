@@ -153,18 +153,18 @@ let _getPage = url => {
   return Number(url.split("page=")[1])
 }
 
-$.action('#filter').keyUp(() => {
+$.document('#filter').keyUp(() => {
   let searchText = $.el('#filter').value
   filterBy(searchText)
 })
 
-$.action("#prev").click(() => {
+$.document("#prev").click(() => {
   if (urlPrev !== null) {
     loadResource(urlPrev)
   }
 })
 
-$.action("#next").click(() => {
+$.document("#next").click(() => {
   if (urlNext !== null) {
     loadResource(urlNext)
   }

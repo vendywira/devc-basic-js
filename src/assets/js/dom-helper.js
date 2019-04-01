@@ -17,10 +17,20 @@ class DOMHelper {
     return el._documentSelector
   }
 
-  static action(querySelector) {
+  static document(querySelector) {
     let el = new DOMHelper
     el._documentSelector = document.querySelector(querySelector)
     return el
+  }
+
+  replace(el) {
+    try {
+      let element = document.createElement('div')
+      element.innerHTML = el
+      this._documentSelector.parentNode.replaceChild(element, this._documentSelector)
+    } catch (e) {
+      console.log(`Warning: ${e}`);
+    }
   }
 
   click(func) {
