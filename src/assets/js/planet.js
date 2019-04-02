@@ -1,5 +1,5 @@
 import HttpLib from "./httplib.js"
-import DOMHelper from "./dom-helper.js"
+import DOMHelper from "./domhelper.js"
 import State from "./state.js"
 import Loading from './loading.js';
 

@@ -1,5 +1,5 @@
 import HttpLib from "./httplib.js"
-import DOMHelper from "./dom-helper.js"
+import DOMHelper from "./domhelper.js/index.js"
 
 const http = new HttpLib
 let $ = DOMHelper

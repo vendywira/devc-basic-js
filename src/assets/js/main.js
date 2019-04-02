@@ -2,7 +2,7 @@ import Navigate from "./navigate.js"
 import Planet from "./planet.js"
 import Loading from "./loading.js"
 import State from "./state.js"
-import DOMHelper from "./dom-helper.js"
+import DOMHelper from "./domhelper.js"
 
 const $ = DOMHelper
 
