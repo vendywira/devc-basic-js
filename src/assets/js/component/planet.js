@@ -1,6 +1,6 @@
-import HttpLib from "./httplib.js"
-import DOMHelper from "./domhelper.js"
-import Store from "./store.js"
+import HttpLib from "../lib/httplib.js"
+import DOMHelper from "../lib/domhelper.js"
+import Store from "../store/store.js"
 import Loading from './loading.js';
 
 const http = new HttpLib

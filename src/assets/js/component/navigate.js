@@ -1,5 +1,5 @@
-import DOMHelper from "./domhelper.js"
-import Store from "./store.js"
+import DOMHelper from "../lib/domhelper.js"
+import Store from "../store/store.js"
 
 const $ = DOMHelper
 const $state = Store.state.navigate

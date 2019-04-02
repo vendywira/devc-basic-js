@@ -1,8 +1,8 @@
-import Navigate from "./navigate.js"
-import Planet from "./planet.js"
-import Loading from "./loading.js"
-import Store from "./store.js"
-import DOMHelper from "./domhelper.js"
+import Navigate from "./component/navigate.js"
+import Planet from "./component/planet.js"
+import Loading from "./component/loading.js"
+import Store from "./store/store.js"
+import DOMHelper from "./lib/domhelper.js"
 
 const $ = DOMHelper
 
