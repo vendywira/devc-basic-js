@@ -1,12 +1,12 @@
 import DOMHelper from "./domhelper.js"
-import State from "./state.js";
+import Store from "./store.js";
 const $ = DOMHelper
 
 let Loading = {
   name: 'loading',
   data: {
     sync: () => {
-      return Loading.data = Object.assign(Loading.data, State.loading.getter())
+      return Loading.data = Object.assign(Loading.data, Store.state.loading.getter())
     }
   },
   template: (data) => {

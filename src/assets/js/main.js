@@ -1,13 +1,10 @@
 import Navigate from "./navigate.js"
 import Planet from "./planet.js"
 import Loading from "./loading.js"
-import State from "./state.js"
+import Store from "./store.js"
 import DOMHelper from "./domhelper.js"
 
 const $ = DOMHelper
-
-let next = null
-let prev = null
 
 let loadPlanet = () => {
   showLoading()
@@ -19,7 +16,7 @@ let loadNavigate = () => {
 }
 
 let showLoading = () => {
-  State.loading.setter({
+  Store.state.loading.setter({
     isShow: true
   })
   Loading.render()
@@ -32,7 +29,7 @@ let goNextPage = () => {
 }
 
 let goPreviousPage = () => {
-  Navigate.method.prev()
+  Navigate.method.previous()
   loadPlanet()
   navigate()
 }
@@ -43,14 +40,14 @@ let navigate = () => {
 
   let filterBy = $.el("#filterBy")
   $.document(filterBy).change(() => {
-    State.navigate.setter({
+    Store.state.navigate.setter({
       filterBy: filterBy.options[filterBy.selectedIndex].value
     })
   })
 
   let searchTextEl = $.el("#searchText")
   $.document(searchTextEl).keyUp(() => {
-    State.navigate.setter({
+    Store.state.navigate.setter({
       searchText: searchTextEl.value
     })
     Navigate.method.search()

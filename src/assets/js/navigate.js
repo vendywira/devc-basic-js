@@ -1,8 +1,9 @@
 import DOMHelper from "./domhelper.js"
-import State from "./state.js"
-
+import Store from "./store.js"
 
 const $ = DOMHelper
+const $state = Store.state.navigate
+const $planet = Store.state.planet
 
 let Navigate = {
   name: 'navigate',
@@ -18,7 +19,7 @@ let Navigate = {
         <option value="climate">climate</option>
       </select>
       <input type="text" id="searchText">
-      <button id="prev" ${data.posiblePrev ? '' : 'disabled'}'>prev</button>
+      <button id="prev" ${data.posiblePrevious ? '' : 'disabled'}>previous</button>
       <button id="next" ${data.posibleNext ? '' : 'disabled'}>next</button>
     </div>
     `
@@ -27,7 +28,7 @@ let Navigate = {
 
   data: {
     sync: () => {
-      return Navigate.data = Object.assign(Navigate.data, State.navigate.getter())
+      return Navigate.data = Object.assign(Navigate.data, $state.getter())
     }
   },
 
@@ -107,10 +108,10 @@ let Navigate = {
           break
       }
 
-      State.planet.setter({
+      $planet.setter({
         planets: planets.slice(0, 10)
       })
-      return State.planet.getter().planets
+      return $planet.getter().planets
     },
 
     _uniqueValidation: (object, arr) => {
@@ -119,30 +120,26 @@ let Navigate = {
       }
     },
 
-    prev: () => {
+    previous: () => {
       let data = Navigate.data.sync()
-      if (data.prev) {
-        State.planet.setter({
-          url: data.prev,
-          pageIndex: (State.planet.data.pageIndex - 1)
+      if (data.previous) {
+        $planet.setter({
+          url: data.previous,
+          pageIndex: ($planet.data.pageIndex - 1)
         })
         Navigate.render()
       }
-      console.log(data);
-      console.log(`prev : ${State.planet.data.pageIndex}`);
     },
 
     next: () => {
       let data = Navigate.data.sync()
       if (data.next) {
-        State.planet.setter({
+        $planet.setter({
           url: data.next,
-          pageIndex: (State.planet.data.pageIndex + 1)
+          pageIndex: ($planet.data.pageIndex + 1)
         })
         Navigate.render()
       }
-      console.log(data);
-      console.log(`next : ${State.planet.data.pageIndex}`);
     },
 
     search: () => {
@@ -153,6 +150,7 @@ let Navigate = {
   render: () => {
     let data = Navigate.data.sync()
     $.document(Navigate.name).replace(Navigate.template(data))
+    console.log(data);
   }
 }
 
