@@ -14,8 +14,9 @@ let Loading = {
 
   },
   render: () => {
-    $.document(Loading.name).replace(Loading.template)
     Loading.data.sync()
+    console.log(Loading.data);
+    $.document(Loading.name).replace(Loading.template)
     let el = $.el('#loading')
     if (Loading.data.isShow) {
       el.setAttribute('style', 'display: block')

@@ -13,19 +13,14 @@ let Navigate = {
   `,
 
   data: {
-    pageIndex: 0,
-    pages: [],
-    filterBy: "",
-    searchText: "",
+    sync: () => {
+      Navigate.data = Object.assign(Navigate.data, State.navigate.getter())
+    }
   },
 
   method: {
     _pushAtIndex: (index, arr, obj) => {
       arr[index] = obj
-    },
-
-    _getPage: () => {
-      return Number(Navigate.data.url.split("page=")[1])
     },
 
     _filterByName: (searchText, planets) => {
@@ -74,6 +69,7 @@ let Navigate = {
     },
 
     filterBy: () => {
+      Navigate.data.sync()
       let searchText = Navigate.data.searchText
       let by = Navigate.data.filterBy
       let planets = _pages.flatMap(page => page.results)

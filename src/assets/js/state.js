@@ -1,6 +1,11 @@
 let State = {
   navigate: {
-    data: "",
+    data: {
+      next: "",
+      prev: "",
+      filterBy: "",
+      searchText: "",
+    },
     setter: data => {
       State.navigate.data = Object.assign(State.navigate.data, data)
     },
@@ -9,7 +14,13 @@ let State = {
     }
   },
   planet: {
-    data: "",
+    data: {
+      url: "https://swapi.co/api/planets/?page=1",
+      count: 0,
+      pageIndex: 0,
+      planets: [],
+      pages: [],
+    },
     setter: data => {
       State.planet.data = Object.assign(State.planet.data, data)
     },
@@ -18,7 +29,9 @@ let State = {
     }
   },
   loading: {
-    data: "",
+    data: {
+      isShow: true,
+    },
     setter: data => {
       State.loading.data = Object.assign(State.loading.data, data)
     },

@@ -23,52 +23,84 @@ let Planet = {
     },
 
     data: {
-        url: "",
-        count: 0,
-        next: "",
-        prev: "",
-        planets: []
-    },
-
-    method: {
-        getPlanets: () => http.get(Planet.data.url)
-            .then(response => {
-                Planet.method._responseConverter(response)
-                Planet.render(Planet.data)
-            })
-            .catch(err => console.log(err)),
-
-        loadResource: () => {
-            let page = _pages[pageIndex]
-            State.loading.isShow = true
-            State.planet.url = url
-
-            if (page && page.results.length > 0) {
-                console.log("load from array");
-                render(page)
-            } else {
-                console.log("load from url");
-                getPlanets(url)
-            }
-            console.log(_pages);
-        },
-
-        _responseConverter: response => {
-            Planet.data.count = response.count
-            Planet.data.next = response.next
-            Planet.data.prev = response.previous
-            Planet.data.planets = response.results
+        sync: () => {
+            return Planet.data = Object.assign(Planet.data, State.planet.getter())
         }
     },
 
-    render: data => {
+    method: {
+        loadResource: async () => {
+            let data = Planet.data.sync()
+            let page = data.pages[data.pageIndex]
+
+            if (page && page.planets.length > 0) {
+                console.log("load resource from cache");
+                State.planet.setter({
+                    planets: page.planets
+                })
+                Planet.render()
+            } else {
+                console.log("load resource throught http request");
+                await Planet.method._getPlanets()
+            }
+        },
+
+        _getPlanets: async () => {
+            let data = Planet.data.sync()
+            http.get(data.url)
+                .then(response => {
+                    response.pageIndex = Planet.method._getPage(data.url)
+                    response.pages = data.pages
+                    Planet.method._responseConverter(response)
+                    Planet.render()
+                })
+                .catch(err => console.log(err))
+        },
+
+        _pushAtIndex: (index, arr, obj) => {
+            arr[index] = obj
+            return arr;
+        },
+
+        _getPage: url => {
+            return Number(url.split("page=")[1]) - 1
+        },
+
+        _responseConverter: response => {
+            let page = {
+                count: response.count,
+                next: response.next,
+                prev: response.previous,
+                planets: response.results,
+            }
+
+            let planetData = {
+                count: response.count,
+                pageIndex: response.pageIndex,
+                planets: response.results,
+                pages: Planet.method._pushAtIndex(response.pageIndex, response.pages, page)
+            }
+            State.planet.setter(planetData)
+
+            let navigateData = {
+                next: response.next,
+                prev: response.previous
+            }
+            State.navigate.setter(navigateData)
+
+            console.log(State.planet.data);
+        }
+    },
+
+    render: () => {
+        let data = Planet.data.sync()
         let view = Planet.template(data.planets)
+        $.document(Planet.name).replace(view)
+
         State.loading.setter({
             isShow: false
         })
         Loading.render()
-        console.log(Loading.data);
-        $.document(Planet.name).replace(view)
     }
 }
 
