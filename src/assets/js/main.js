@@ -1,12 +1,9 @@
 import Navigate from "./navigate.js"
 import Planet from "./planet.js"
 import Loading from "./loading.js"
+import State from "./state.js"
 
 let url = "https://swapi.co/api/planets/?page=1"
-
-let state = {
-
-}
 
 let loadPlanet = async url => {
   Planet.data.url = url
@@ -27,13 +24,6 @@ window.addEventListener('load', () => {
   loadPlanet(url)
 });
 
-let getPlanets = url => http.get(url)
-  .then(response => {
-    response.url = url
-    loadDataToTable(response)
-  })
-  .catch(err => console.log(err))
-
 let loadDataToTable = response => {
   content.innerHTML = null
   pageCount = _getPage(response.url)
@@ -52,33 +42,6 @@ let loadDataToTable = response => {
   }
   loading(false)
 }
-
-let filterUniquePlanet = (planet, planets) => {
-  if (!planets.includes(planet)) {
-    planets.push(planet)
-  }
-}
-
-// let loading = isShow => {
-//   
-// }
-
-// $.document('#filter').keyUp(() => {
-//   let searchText = $.el('#filter').value
-//   filterBy(searchText)
-// })
-
-// $.document("#prev").click(() => {
-//   if (urlPrev !== null) {
-//     loadResource(urlPrev)
-//   }
-// })
-
-// $.document("#next").click(() => {
-//   if (urlNext !== null) {
-//     loadResource(urlNext)
-//   }
-// })
 
 let loadResource = url => {
   loading(true)

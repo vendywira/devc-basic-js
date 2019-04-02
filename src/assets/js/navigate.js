@@ -1,4 +1,7 @@
 import DOMHelper from "./dom-helper.js"
+import State from "./state.js"
+
+
 const $ = DOMHelper
 
 let Navigate = {
@@ -10,14 +13,10 @@ let Navigate = {
   `,
 
   data: {
-    url: "",
-    next: "",
-    prev: "",
-    page: 1,
+    pageIndex: 0,
     pages: [],
     filterBy: "",
     searchText: "",
-    planets: []
   },
 
   method: {
@@ -104,21 +103,29 @@ let Navigate = {
       return planets.slice(0, 10)
     },
 
-    loadResource: url => {
-      loading(true)
-      let page = _pages[_getPage(url) - 1]
-      if (page && page.results.length > 0) {
-        console.log("load from array");
-        urlNext = page.urlNext
-        urlPrev = page.urlPrev
-        url = page.url
-        loadDataToTable(page)
-      } else {
-        console.log("load from url");
-        getPlanets(url)
+    _filterUniquePlanet: (planet, planets) => {
+      if (!planets.includes(planet)) {
+        planets.push(planet)
       }
-      console.log(_pages);
     },
+
+    prev: () => {
+      if (urlPrev !== null) {
+        loadResource(urlPrev)
+      }
+    },
+
+    next: () => {
+      if (urlNext !== null) {
+        loadResource(urlNext)
+      }
+    },
+
+    search: () => {
+      Navigate.data.searchText = $.el('#filter').value
+      Navigate.data.filterBy = ""
+      filterBy()
+    }
   },
 
   render: () => {

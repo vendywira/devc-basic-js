@@ -1,5 +1,7 @@
 import HttpLib from "./httplib.js"
 import DOMHelper from "./dom-helper.js"
+import State from "./state.js"
+import Loading from './loading.js';
 
 const http = new HttpLib
 let $ = DOMHelper
@@ -22,25 +24,48 @@ let Planet = {
 
   data: {
     url: "",
-    response: {
-      count: 0,
-      next: "",
-      previous: "",
-      results: []
-    }
+    count: 0,
+    next: "",
+    prev: "",
+    planets: []
   },
 
   method: {
     getPlanets: () => http.get(Planet.data.url)
       .then(response => {
-        Planet.data.response = response
+        Planet.method._responseConverter(response)
         Planet.render(Planet.data)
       })
       .catch(err => console.log(err)),
+
+    loadResource: () => {
+      let page = _pages[pageIndex]
+      State.loading.isShow = true
+      State.planet.url = url
+
+      if (page && page.results.length > 0) {
+        console.log("load from array");
+        render(page)
+      } else {
+        console.log("load from url");
+        getPlanets(url)
+      }
+      console.log(_pages);
+    },
+
+    _responseConverter: response => {
+      Planet.data.count = response.count
+      Planet.data.next = response.next
+      Planet.data.prev = response.previous
+      Planet.data.planets = response.results
+    }
   },
 
   render: data => {
-    let view = Planet.template(data.response.results)
+    let view = Planet.template(data.planets)
+    State.loading.isShow = false
+    Loading.data.isShow = false
+    Loading.render()
     $.document(Planet.name).replace(view)
   }
 }
