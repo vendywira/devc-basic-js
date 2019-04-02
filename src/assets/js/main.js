@@ -7,6 +7,9 @@ let url = "https://swapi.co/api/planets/?page=1"
 
 let loadPlanet = async url => {
   Planet.data.url = url
+  State.loading.setter({
+    isShow: true
+  })
   await Planet.method.getPlanets()
 }
 

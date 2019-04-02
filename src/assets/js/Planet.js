@@ -63,9 +63,11 @@ let Planet = {
 
   render: data => {
     let view = Planet.template(data.planets)
-    State.loading.isShow = false
-    Loading.data.isShow = false
+    State.loading.setter({
+      isShow: false
+    })
     Loading.render()
+    console.log(Loading.data);
     $.document(Planet.name).replace(view)
   }
 }

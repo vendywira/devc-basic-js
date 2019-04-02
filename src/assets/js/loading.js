@@ -1,10 +1,13 @@
 import DOMHelper from "./dom-helper.js"
+import State from "./state.js";
 const $ = DOMHelper
 
 let Loading = {
   name: 'loading',
   data: {
-    isShow: true
+    sync: () => {
+      Loading.data = Object.assign(Loading.data, State.loading.getter())
+    }
   },
   template: `<div id="loading">Loading...</div>`,
   method: {
@@ -12,6 +15,7 @@ let Loading = {
   },
   render: () => {
     $.document(Loading.name).replace(Loading.template)
+    Loading.data.sync()
     let el = $.el('#loading')
     if (Loading.data.isShow) {
       el.setAttribute('style', 'display: block')
