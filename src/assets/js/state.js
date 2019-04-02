@@ -5,7 +5,8 @@ let State = {
       prev: "",
       posibleNext: true,
       posiblePrev: false,
-      filterBy: "",
+      pages: [],
+      filterBy: "all",
       searchText: "",
     },
     setter: data => {

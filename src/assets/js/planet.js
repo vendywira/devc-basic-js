@@ -72,12 +72,13 @@ let Planet = {
                 prev: response.previous,
                 results: response.results,
             }
+            let pagesData = Planet.method._pushAtIndex(response.pageIndex, response.pages, page)
 
             let planetData = {
                 count: response.count,
                 pageIndex: response.pageIndex,
                 planets: response.results,
-                pages: Planet.method._pushAtIndex(response.pageIndex, response.pages, page),
+                pages: pagesData,
             }
             State.planet.setter(planetData)
 
@@ -86,6 +87,7 @@ let Planet = {
                 prev: response.previous,
                 posibleNext: response.next ? true : false,
                 posiblePrev: response.prev ? true : false,
+                pages: pagesData,
             }
             State.navigate.setter(navigateData)
         }

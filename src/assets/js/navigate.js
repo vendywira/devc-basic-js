@@ -9,9 +9,18 @@ let Navigate = {
   template: (data) => {
     let view = `
     <div id='navigate'>
-      <input type="text" id="filter">
+      <select id="filterBy">
+        <option value="all">all</option>
+        <option value="name">name</option>
+        <option value="location">location</option>
+        <option value="orbital">orbital</option>
+        <option value="diameter">diameter</option>
+        <option value="climate">climate</option>
+      </select>
+      <input type="text" id="searchText">
       <button id="prev" ${data.posiblePrev ? '' : 'disabled'}'>prev</button>
       <button id="next" ${data.posibleNext ? '' : 'disabled'}>next</button>
+    </div>
     `
     return view
   },
@@ -54,15 +63,16 @@ let Navigate = {
     },
 
     _filterByAll: (searchText, planets) => {
-      let filteredItems = filterByName(searchText, planets)
-        .concat(filterByRotation(searchText, planets))
-        .concat(filterByOrbital(searchText, planets))
-        .concat(filterByDiameter(searchText, planets))
-        .concat(filterByClimate(searchText, planets))
+      let $m = Navigate.method
+      let filteredItems = $m._filterByName(searchText, planets)
+        .concat($m._filterByRotation(searchText, planets))
+        .concat($m._filterByOrbital(searchText, planets))
+        .concat($m._filterByDiameter(searchText, planets))
+        .concat($m._filterByClimate(searchText, planets))
 
       let finalFilteredItems = []
       filteredItems.forEach(planet => {
-        filterUniquePlanet(planet, finalFilteredItems)
+        $m._uniqueValidation(planet, finalFilteredItems)
       })
 
       return finalFilteredItems
@@ -70,33 +80,37 @@ let Navigate = {
 
     filterBy: () => {
       let data = Navigate.data.sync()
+      let $m = Navigate.method
       let searchText = data.searchText
       let by = Navigate.data.filterBy
-      let planets = _pages.flatMap(page => page.results)
+      let planets = data.pages.flatMap(page => page.results)
       console.log(planets);
-      content.innerHTML = ""
       switch (by) {
         case 'name':
-          planets = filterByName(searchText, planets)
+          planets = $m._filterByName(searchText, planets)
           break
         case 'rotation':
-          planets = filterByRotation(searchText, planets)
+          planets = $m._filterByRotation(searchText, planets)
           break
         case 'orbital':
-          planets = filterByOrbital(searchText, planets)
+          planets = $m._filterByOrbital(searchText, planets)
           break
         case 'diameter':
-          planets = filterByDiameter(searchText, planets)
+          planets = $m._filterByDiameter(searchText, planets)
           break
         case 'climate':
-          planets = filterByClimate(searchText, planets)
+          planets = $m._filterByClimate(searchText, planets)
           break
         default:
-          planets = filterByAll(searchText, planets)
+          planets = $m._filterByAll(searchText, planets)
           console.log(planets);
           break
       }
-      return planets.slice(0, 10)
+
+      State.planet.setter({
+        planets: planets.slice(0, 10)
+      })
+      return State.planet.getter().planets
     },
 
     _uniqueValidation: (object, arr) => {
@@ -132,7 +146,7 @@ let Navigate = {
     },
 
     search: () => {
-      Navigate.method.filterBy()
+      return Navigate.method.filterBy()
     }
   },
 

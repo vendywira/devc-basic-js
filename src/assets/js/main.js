@@ -42,6 +42,24 @@ let goPreviousPage = () => {
 let navigate = () => {
   $.document("#next").click(() => goNextPage())
   $.document("#prev").click(() => goPreviousPage())
+
+  let filterBy = $.el("#filterBy")
+  $.document(filterBy).change(() => {
+    State.navigate.setter({
+      filterBy: filterBy.options[filterBy.selectedIndex].value
+    })
+    console.log(filterBy.options[filterBy.selectedIndex].value);
+  })
+
+  let searchTextEl = $.el("#searchText")
+  console.log(searchTextEl);
+  $.document(searchTextEl).keyUp(() => {
+    State.navigate.setter({
+      searchText: searchTextEl.value
+    })
+    Navigate.method.search()
+    Planet.render()
+  })
 }
 
 window.addEventListener('load', () => {
