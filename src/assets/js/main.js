@@ -29,14 +29,12 @@ let goNextPage = () => {
   Navigate.method.next()
   loadPlanet()
   navigate()
-  console.log(next, prev);
 }
 
 let goPreviousPage = () => {
   Navigate.method.prev()
   loadPlanet()
   navigate()
-  console.log(next, prev);
 }
 
 let navigate = () => {
@@ -48,11 +46,9 @@ let navigate = () => {
     State.navigate.setter({
       filterBy: filterBy.options[filterBy.selectedIndex].value
     })
-    console.log(filterBy.options[filterBy.selectedIndex].value);
   })
 
   let searchTextEl = $.el("#searchText")
-  console.log(searchTextEl);
   $.document(searchTextEl).keyUp(() => {
     State.navigate.setter({
       searchText: searchTextEl.value

@@ -17,7 +17,6 @@ let Loading = {
   },
   render: () => {
     let data = Loading.data.sync()
-    console.log(Loading.data);
     $.document(Loading.name).replace(Loading.template(data))
   }
 }

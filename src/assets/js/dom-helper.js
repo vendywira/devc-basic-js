@@ -25,7 +25,6 @@ class DOMHelper {
       let element = document.querySelector(querySelector)
       el._documentSelector = element ? element : document.getElementById(querySelector)
     }
-    console.log(el);
     return el
   }
 
