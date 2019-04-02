@@ -19,7 +19,7 @@ let Planet = {
                 <li>climate: ${planet.climate}</li>
               </ul>`
         })
-        return `<div class="page page__content" id="content">${view}</div>`
+        return `<div class="page page__content" id="planet">${view}</div>`
     },
 
     data: {
@@ -31,13 +31,12 @@ let Planet = {
     method: {
         loadResource: async () => {
             let data = Planet.data.sync()
-            let page = data.pages[data.pageIndex]
+            let index = data.pageIndex
+            let page = data.pages[index]
 
-            if (page && page.planets.length > 0) {
+            if (page && page.planets && page.planets.length > 0) {
                 console.log("load resource from cache");
-                State.planet.setter({
-                    planets: page.planets
-                })
+                Planet.method._responseConverter(page)
                 Planet.render()
             } else {
                 console.log("load resource throught http request");
@@ -71,24 +70,24 @@ let Planet = {
                 count: response.count,
                 next: response.next,
                 prev: response.previous,
-                planets: response.results,
+                results: response.results,
             }
 
             let planetData = {
                 count: response.count,
                 pageIndex: response.pageIndex,
                 planets: response.results,
-                pages: Planet.method._pushAtIndex(response.pageIndex, response.pages, page)
+                pages: Planet.method._pushAtIndex(response.pageIndex, response.pages, page),
             }
             State.planet.setter(planetData)
 
             let navigateData = {
                 next: response.next,
-                prev: response.previous
+                prev: response.previous,
+                posibleNext: response.next ? true : false,
+                posiblePrev: response.prev ? true : false,
             }
             State.navigate.setter(navigateData)
-
-            console.log(State.planet.data);
         }
     },
 

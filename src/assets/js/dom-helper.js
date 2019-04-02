@@ -21,8 +21,10 @@ class DOMHelper {
     let el = new DOMHelper
     if (typeof querySelector === 'object') {
       el._documentSelector = querySelector
+      console.log("object selector", querySelector, el);
     } else {
-      el._documentSelector = document.querySelector(querySelector)
+      let element = document.querySelector(querySelector)
+      el._documentSelector = element ? element : document.getElementById(querySelector)
     }
     return el
   }

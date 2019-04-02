@@ -6,23 +6,19 @@ let Loading = {
   name: 'loading',
   data: {
     sync: () => {
-      Loading.data = Object.assign(Loading.data, State.loading.getter())
+      return Loading.data = Object.assign(Loading.data, State.loading.getter())
     }
   },
-  template: `<div id="loading">Loading...</div>`,
+  template: (data) => {
+    return `<div id="loading" style="display: ${data.isShow ? 'block' : 'none'}">Loading...</div>`
+  },
   method: {
 
   },
   render: () => {
-    Loading.data.sync()
+    let data = Loading.data.sync()
     console.log(Loading.data);
-    $.document(Loading.name).replace(Loading.template)
-    let el = $.el('#loading')
-    if (Loading.data.isShow) {
-      el.setAttribute('style', 'display: block')
-    } else {
-      el.setAttribute('style', 'display: none')
-    }
+    $.document(Loading.name).replace(Loading.template(data))
   }
 }
 

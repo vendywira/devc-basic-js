@@ -6,23 +6,23 @@ const $ = DOMHelper
 
 let Navigate = {
   name: 'navigate',
-  template: `
-    <input type="text" id="filter">
-    <button id="prev">prev</button>
-    <button id="next">next</button>
-  `,
+  template: (data) => {
+    let view = `
+    <div id='navigate'>
+      <input type="text" id="filter">
+      <button id="prev" ${data.posiblePrev ? '' : 'disabled'}'>prev</button>
+      <button id="next" ${data.posibleNext ? '' : 'disabled'}>next</button>
+    `
+    return view
+  },
 
   data: {
     sync: () => {
-      Navigate.data = Object.assign(Navigate.data, State.navigate.getter())
+      return Navigate.data = Object.assign(Navigate.data, State.navigate.getter())
     }
   },
 
   method: {
-    _pushAtIndex: (index, arr, obj) => {
-      arr[index] = obj
-    },
-
     _filterByName: (searchText, planets) => {
       return planets
         .filter(planet => planet.name.toLowerCase().trim()
@@ -69,8 +69,8 @@ let Navigate = {
     },
 
     filterBy: () => {
-      Navigate.data.sync()
-      let searchText = Navigate.data.searchText
+      let data = Navigate.data.sync()
+      let searchText = data.searchText
       let by = Navigate.data.filterBy
       let planets = _pages.flatMap(page => page.results)
       console.log(planets);
@@ -99,33 +99,46 @@ let Navigate = {
       return planets.slice(0, 10)
     },
 
-    _filterUniquePlanet: (planet, planets) => {
-      if (!planets.includes(planet)) {
-        planets.push(planet)
+    _uniqueValidation: (object, arr) => {
+      if (!arr.includes(object)) {
+        arr.push(object)
       }
     },
 
     prev: () => {
-      if (urlPrev !== null) {
-        loadResource(urlPrev)
+      let data = Navigate.data.sync()
+      if (data.prev) {
+        State.planet.setter({
+          url: data.prev,
+          pageIndex: (State.planet.data.pageIndex - 1)
+        })
+        Navigate.render()
       }
+      console.log(data);
+      console.log(`prev : ${State.planet.data.pageIndex}`);
     },
 
     next: () => {
-      if (urlNext !== null) {
-        loadResource(urlNext)
+      let data = Navigate.data.sync()
+      if (data.next) {
+        State.planet.setter({
+          url: data.next,
+          pageIndex: (State.planet.data.pageIndex + 1)
+        })
+        Navigate.render()
       }
+      console.log(data);
+      console.log(`next : ${State.planet.data.pageIndex}`);
     },
 
     search: () => {
-      Navigate.data.searchText = $.el('#filter').value
-      Navigate.data.filterBy = ""
-      filterBy()
+      Navigate.method.filterBy()
     }
   },
 
   render: () => {
-    $.document(Navigate.name).replace(Navigate.template)
+    let data = Navigate.data.sync()
+    $.document(Navigate.name).replace(Navigate.template(data))
   }
 }
 

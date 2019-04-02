@@ -3,6 +3,8 @@ let State = {
     data: {
       next: "",
       prev: "",
+      posibleNext: true,
+      posiblePrev: false,
       filterBy: "",
       searchText: "",
     },
