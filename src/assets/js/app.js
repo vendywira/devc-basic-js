@@ -104,7 +104,7 @@ let calculateOperation = action => {
       break
     default:
       if (!isTypeSecondaryNumber && operator !== null) {
-        displayNumber = netralNumber(operator)
+        displayNumber = neutralNumber(operator)
       }
 
       // will get lastNumber from screen when initialize data
@@ -261,7 +261,7 @@ let factorialize = n1 => {
   }
 }
 
-let netralNumber = operator => {
+let neutralNumber = operator => {
   if (operator === 'add' || operator === 'subtract') {
     return 0
   }
