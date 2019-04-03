@@ -5,9 +5,11 @@ Learn more about basic html, css and js with expert on devc community Jakarta.
 ![screenshot cv](sc-cv.png "exercise 1 introduce html and css")
 
 ## Exercise 2: Basic js and DOM manipulation
-###### click image to preview functionality
-[![screenshot cv](sc-calculator.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/index.html)
+![screenshot calculator](sc-calculator.png "exercise 2 basic js and dom manipulation")
 
+## Exercise 3: Basic Logic JS
+###### click image to preview this exercise
+[![screenshot table swapi](sc-table-swapi.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/index.html)
 
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
@@ -41,22 +43,7 @@ scientific.addEventListener('click', e => {
     const action = key.getAttribute('action');
 
     if (!action) {
-      const number = getTextContentElement(key)
-      if (displayNumber === null && displayNumberTemporary !== null) {
-        isTypeSecondNumber = true
-      }
-      // will execute when on screen print 0.
-      if (screenEmpty) {
-        screenEmpty = false;
-        setDisplayScreen(number)
-      } else {
-        // add number and check validate number display start by zero
-        if (number === ".") {
-          setDisplayScreen(getDisplayScreen() + number)
-        } else {
-          setDisplayScreen(reduceZeroNumber(getDisplayScreen() + number))
-        }
-      }
+      typeNumber()
     }
 
     if (action) {
@@ -65,3 +52,7 @@ scientific.addEventListener('click', e => {
   }
 })
 ```
+## Component Base
+on exercise 3, I learn about function, class and object. also i read some literation about component base and how implement best practice on js. on all literation almost used on modern framework like react, vue or angular. but i think i can implement also on vanilla js. there are some problem when i try to implement. such as the component should be independent not depend to other, first problem i found about how to communicate between components?
+ok i have solution to provide each components their own data and i will pass that data when communicate. but we must be remember, component is independent to other.
+i try to solve this problem with create center global data to store shared data. but blowup other problem, the component not only communicate with data, but also necessery action like loading and etc. therefor we need provide central action abstraction for component which one need call action other action. but for present, still try to implement central action and not yet going done.
