@@ -1,14 +1,12 @@
 import DOMHelper from "../lib/domhelper.js"
 import Store from "../store/store.js";
 
-const $ = DOMHelper
-const $state = Store.state.loading
 
 let Loading = {
   name: 'loading',
   data: {
     sync: () => {
-      return Loading.data = Object.assign(Loading.data, $state.getter())
+      return $_data = Object.assign($_data, $state.getter())
     }
   },
   template: (data) => {
@@ -140,9 +138,19 @@ let Loading = {
 
   },
   render: () => {
-    let data = Loading.data.sync()
-    $.document(Loading.name).replace(Loading.template(data))
+    $_data.sync()
+    $.document($_name).replace($_template($_data))
   }
 }
+
+const $ = DOMHelper
+const $state = Store.state.loading
+
+let $vm = Loading
+let $_method = $vm.method
+let $_data = $vm.data
+let $_name = $vm.name
+let $_template = data => $vm.template(data)
+let $_render = () => $vm.render()
 
 export default Loading;
