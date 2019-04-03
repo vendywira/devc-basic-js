@@ -12,17 +12,35 @@ const $loading = Store.state.loading
 let Planet = {
   name: 'planet',
   template: (planets) => {
-    let view = ""
+    let row = ""
     planets.forEach(planet => {
-      view += `<ul class="content content__list" id="content-list">
-                <li>name: ${planet.name}</li>
-                <li>rotation period: ${planet.rotation_period}</li>
-                <li>orbital period: ${planet.orbital_period}</li>
-                <li>diameter: ${planet.diameter}</li>
-                <li>climate: ${planet.climate}</li>
-              </ul>`
+      row += `
+            <tr>
+              <td>${planet.name}</td>
+              <td>${planet.rotation_period}</td>
+              <td>${planet.orbital_period}</td>
+              <td>${planet.diameter}</td>
+              <td>${planet.climate}</td>
+            </tr>`
     })
-    return `<div class="page page__content" id="planet">${view}</div>`
+
+    let table = `
+            <table class = "table is-bordered is-striped is-center" style="margin: 0 auto">
+               <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Rotation Period</th>
+                      <th>Orbital Period</th>
+                      <th>Diameter</th>
+                      <th>Climate</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  ${row}
+               </tbody>
+            </table>
+            `
+    return `<div id="planet" class="column is-full">${table}</div>`
   },
 
   data: {

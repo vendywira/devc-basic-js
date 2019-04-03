@@ -9,20 +9,36 @@ let Navigate = {
   name: 'navigate',
   template: (data) => {
     let view = `
-    <div id='navigate'>
-      <select id="filterBy">
-        <option value="all">all</option>
-        <option value="name">name</option>
-        <option value="rotation">rotation</option>
-        <option value="orbital">orbital</option>
-        <option value="diameter">diameter</option>
-        <option value="climate">climate</option>
-      </select>
-      <input type="text" id="searchText">
-      <button id="prev" ${data.posiblePrevious ? '' : 'disabled'}>previous</button>
-      <button id="next" ${data.posibleNext ? '' : 'disabled'}>next</button>
-    </div>
-    `
+      <div class="column">
+        <div id='navigate' class="columns is-mobile is-multi-line is-centered">
+          <div class="field">
+            <div class="column control">
+              <div class="select is-primary">
+                <select id="filterBy">
+                  <option value="all">all</option>
+                  <option value="name">name</option>
+                  <option value="rotation">rotation</option>
+                  <option value="orbital">orbital</option>
+                  <option value="diameter">diameter</option>
+                  <option value="climate">climate</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="column control">
+              <input class="input is-rounded" type="text" placeholder="Find planet" id="searchText">
+            </div>
+          </div>
+          <div class="field">
+            <div class="column control">
+              <buthon class="pagination-previous" id="prev" ${data.posiblePrevious ? '' : 'disabled'}>prev</buthon>
+              <button class="pagination-next" id="next" ${data.posibleNext ? '' : 'disabled'}>next</button>
+            </div>
+          </div>
+        </div>
+      </div>`
+
     return view
   },
 

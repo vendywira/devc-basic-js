@@ -1,4 +1,7 @@
-'use strict';
+/**
+ * @author vendywira
+ * this helper will help you to making http request
+ */
 
 class HttpLib {
   async get(url) {
