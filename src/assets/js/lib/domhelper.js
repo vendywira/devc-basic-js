@@ -2,7 +2,7 @@
  * @author vendywira
  * this helper will help you to simplifiying dom manipulation
  * this helper work like jquery
- * import this library on your code and create class instant and you can use the function
+ * import this library on your code and create class instant and you can used it function
  */
 
 class DOMHelper {
@@ -31,6 +31,8 @@ class DOMHelper {
   replace(el) {
     try {
       let element = document.createElement('div')
+      let id = this._documentSelector.getAttribute('id')
+      element.setAttribute("id", id ? id : this._documentSelector.nodeName)
       element.innerHTML = el
       this._documentSelector.parentNode.replaceChild(element, this._documentSelector)
       this._documentSelector = element
