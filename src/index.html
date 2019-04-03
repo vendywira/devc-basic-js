@@ -6,58 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
 </head>
 
 <body>
-  <div class="scientific">
-    <div class="grid__md-4 calculator">
-      <div class="calculator__display">0</div>
-      <div>
-        <div class="grid__md-1 inline-block button button--grey" action="clear">AC</div>
-        <div class="grid__md-1 inline-block button button--grey" action="del">Del</div>
-        <div class="grid__md-1 inline-block button button--grey" action="equal">=</div>
-        <div class="grid__md-1 inline-block button button--orange" action="phi">&#960;</div>
-        <div class="grid__md-1 inline-block button button--red" action="percent">%</div>
-      </div>
-      <div>
-        <div class="grid__md-1 inline-block button button--black">7</div>
-        <div class="grid__md-1 inline-block button button--black">8</div>
-        <div class="grid__md-1 inline-block button button--black">9</div>
-        <div class="grid__md-1 inline-block button button--orange" action="exp">x&#94;</div>
-        <div class="grid__md-1 inline-block button button--red" action="divide">/</div>
-      </div>
-      <div>
-        <div class="grid__md-1 inline-block button button--black">4</div>
-        <div class="grid__md-1 inline-block button button--black">5</div>
-        <div class="grid__md-1 inline-block button button--black">6</div>
-        <div class="grid__md-1 inline-block button button--orange" action="ln">ln</div>
-        <div class="grid__md-1 inline-block button button--red" action="multiply">*</div>
-      </div>
-      <div>
-        <div class="grid__md-1 inline-block button button--black">1</div>
-        <div class="grid__md-1 inline-block button button--black">2</div>
-        <div class="grid__md-1 inline-block button button--black">3</div>
-        <div class="grid__md-1 inline-block button button--orange" action="sqrt">&radic;</div>
-        <div class="grid__md-1 inline-block button button--red" action="subtract">-</div>
-      </div>
-      <div>
-        <div class="grid__md-1 inline-block button button--red" action="plus-min">&#177;</div>
-        <div class="grid__md-1 inline-block button button--black">0</div>
-        <div class="grid__md-1 inline-block button button--red">.</div>
-        <div class="grid__md-1 inline-block button button--orange" action="sqr">x&#50;</div>
-        <div class="grid__md-1 inline-block button button--red" action="add">+</div>
-      </div>
-      <div>
-        <div class="grid__md-1 inline-block button button--red" action="factorialize">x!</div>
-        <div class="grid__md-1 inline-block button button--red" action="abs">abs</div>
-        <div class="grid__md-1 inline-block button button--red" action="cos">cos</div>
-        <div class="grid__md-1 inline-block button button--red" action="sin">sin</div>
-        <div class="grid__md-1 inline-block button button--red" action="tan">tan</div>
-      </div>
-    </div>
+  <div>
+    <loading></loading>
+    <navigate></navigate>
+    <planet></planet>
   </div>
-  <script src="./assets/js/app.js"></script>
+  <script type="module" src="./assets/js/main.js"></script>
 </body>
 
 </html>
