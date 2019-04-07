@@ -1,3 +1,10 @@
+import Observable from "../lib/observable.js"
+
+const loadResourceObserver = new Observable()
+const loadingObserver = new Observable()
+const navigateObserver = new Observable()
+const planetRenderObserver = new Observable()
+
 let Store = {
   state: {
     next: "",
@@ -35,6 +42,50 @@ let Store = {
   },
   getter: function () {
     return this.state
+  },
+  Action: {
+    subscriber: {
+      navigateRender(f) {
+        navigateObserver.subscribe(f)
+      },
+      LoadResource(f) {
+        loadResourceObserver.subscribe(f)
+      },
+      planetRender(f) {
+        planetRenderObserver.subscribe(f)
+      },
+      loading(f) {
+        loadingObserver.subscribe(f)
+      }
+    },
+    unsubscribe: {
+      navigate() {
+        navigateObserver.unsubscribeAll()
+      },
+      loadResource() {
+        loadResourceObserver.unsubscribeAll()
+      },
+      planetRender() {
+        planetRenderObserver.unsubscribeAll()
+      },
+      loading() {
+        loadingObserver.unsubscribeAll()
+      }
+    },
+    notify: {
+      navigate() {
+        navigateObserver.notify()
+      },
+      loadResource() {
+        loadResourceObserver.notify()
+      },
+      planetRender() {
+        planetRenderObserver.notify()
+      },
+      loading() {
+        loadingObserver.notify()
+      }
+    }
   }
 }
 
