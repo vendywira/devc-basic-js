@@ -27,7 +27,7 @@ let Navigate = {
           </div>
           <div class="field">
             <div class="column control">
-              <input class="input is-rounded" type="text" placeholder="Find planet" id="searchText">
+              <input class="input is-rounded" type="text" placeholder="Find planet" id="searchText" value="${data.searchText}" autofocus>
             </div>
           </div>
           <div class="field">
@@ -177,6 +177,8 @@ let Navigate = {
     })
 
     let searchTextEl = $.el("#searchText")
+    searchTextEl.selectionStart = searchTextEl.selectionEnd = searchTextEl.value.length;
+    searchTextEl.focus()
     $.document(searchTextEl).keyUp(() => {
       Store.mutation.searchText(searchTextEl.value)
       Navigate.method.search()
