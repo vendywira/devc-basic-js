@@ -1,14 +1,13 @@
 import DOMHelper from "../lib/domhelper.js"
-import Store from "../store/store.js";
+import Store from "../store/store.js"
 
-const $ = DOMHelper
-const $state = Store.state.loading
 
 let Loading = {
   name: 'loading',
   data: {
     sync: () => {
-      return Loading.data = Object.assign(Loading.data, $state.getter())
+      console.log(Store.getter());
+      return $_data = Object.assign($_data, Store.getter())
     }
   },
   template: (data) => {
@@ -134,15 +133,25 @@ let Loading = {
             }
             </style>
     `
-    return `${css} <div class="loading" id="loading" style="display: ${data.isShow ? 'block' : 'none'}">Loading&#8230;</div>`
+    return `${css} <div class="loading" id="loading" style="display: ${data.isShowLoading ? 'block' : 'none'}">Loading&#8230;</div>`
   },
   method: {
 
   },
   render: () => {
-    let data = Loading.data.sync()
-    $.document(Loading.name).replace(Loading.template(data))
+    $_data.sync()
+    $.document($_name).replace($_template($_data))
   }
 }
+
+const $ = DOMHelper
+const $state = Store.getter()
+
+let $vm = Loading
+let $_method = $vm.method
+let $_data = $vm.data
+let $_name = $vm.name
+let $_template = data => $vm.template(data)
+let $_render = () => $vm.render()
 
 export default Loading;
