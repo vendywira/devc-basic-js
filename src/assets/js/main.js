@@ -1,10 +1,16 @@
 import Planet from "./component/planet.js"
-import DOMHelper from "./lib/domhelper.js"
 
-const $ = DOMHelper
+import App from "./lib/app.js"
 
-let loadPlanet = () => {
-  Planet.method.loadResource()
-}
-
-window.addEventListener('load', () => loadPlanet())
+window.addEventListener('load', function () {
+  new App({
+    el: "#app",
+    template: `
+      <loading></loading>
+      <navigate></navigate>
+      <planet></planet>`,
+    main: () => {
+      Planet.method.loadResource()
+    }
+  })
+})
