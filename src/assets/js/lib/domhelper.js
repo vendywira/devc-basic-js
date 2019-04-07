@@ -17,6 +17,11 @@ class DOMHelper {
     return el._documentSelector
   }
 
+  static elements(querySelectors) {
+    let domElements = document.querySelectorAll(querySelectors)
+    return domElements.length !== 0 ? domElements : document.querySelectorAll(`#${querySelectors}`)
+  }
+
   static document(querySelector) {
     let el = new DOMHelper
     if (typeof querySelector === 'object') {
@@ -28,11 +33,20 @@ class DOMHelper {
     return el
   }
 
+  child(querySelector) {
+    this._documentSelector = this._documentSelector.querySelector(querySelector)
+    return this
+  }
+
+  getElement() {
+    return this._documentSelector
+  }
+
   replace(el) {
     try {
       let element = document.createElement('div')
       let id = this._documentSelector.getAttribute('id')
-      element.setAttribute("id", id ? id : this._documentSelector.nodeName)
+      element.setAttribute("id", id ? id : this._documentSelector.nodeName.toLowerCase())
       element.innerHTML = el
       this._documentSelector.parentNode.replaceChild(element, this._documentSelector)
       this._documentSelector = element
@@ -43,43 +57,83 @@ class DOMHelper {
   }
 
   click(func) {
-    this._documentSelector.addEventListener('click', func)
+    try {
+      this._documentSelector.addEventListener('click', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   dblClick(func) {
-    this._documentSelector.addEventListener('dblclick', func)
+    try {
+      this._documentSelector.addEventListener('dblclick', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   mouseOver(func) {
-    this._documentSelector.addEventListener('mouseover', func)
+    try {
+      this._documentSelector.addEventListener('mouseover', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   mouseEnter(func) {
-    this._documentSelector.addEventListener('mouseenter', func)
+    try {
+      this._documentSelector.addEventListener('mouseenter', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   mouseLeave(func) {
-    this._documentSelector.addEventListener('mouseleave', func)
+    try {
+      this._documentSelector.addEventListener('mouseleave', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   mouseDown(func) {
-    this._documentSelector.addEventListener('mouseleave', func)
+    try {
+      this._documentSelector.addEventListener('mouseleave', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   change(func) {
-    this._documentSelector.addEventListener('change', func)
+    try {
+      this._documentSelector.addEventListener('change', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   keyUp(func) {
-    this._documentSelector.addEventListener('keyup', func)
+    try {
+      this._documentSelector.addEventListener('keyup', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   keyDown(func) {
-    this._documentSelector.addEventListener('keydown', func)
+    try {
+      this._documentSelector.addEventListener('keydown', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   keyPress(func) {
-    this._documentSelector.addEventListener('keypress', func)
+    try {
+      this._documentSelector.addEventListener('keypress', func)
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 

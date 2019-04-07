@@ -1,7 +1,5 @@
 import HttpLib from "../lib/httplib.js"
 import DOMHelper from "../lib/domhelper.js"
-import Loading from './loading.js';
-import Navigate from './navigate.js';
 import Store from "../store/store.js"
 
 const http = new HttpLib
@@ -39,7 +37,7 @@ let Planet = {
                </tbody>
             </table>
             `
-    return `<div id="planet" class="column is-full">${table}</div>`
+    return `<div class="column is-full">${table}</div>`
   },
 
   data: {
@@ -48,10 +46,18 @@ let Planet = {
     }
   },
 
+  init: () => {
+    $state.Action.unsubscribe.loadResource()
+    $state.Action.subscriber.LoadResource(() => Planet.method.loadResource())
+
+    $state.Action.unsubscribe.planetRender()
+    $state.Action.subscriber.planetRender(() => Planet.render())
+  },
+
   method: {
     loadResource: async () => {
       Store.mutation.switchLoading(true)
-      Loading.render()
+      $state.Action.notify.loading()
 
       let data = Planet.data.sync()
       let index = data.pageIndex
@@ -127,7 +133,6 @@ let Planet = {
         enableBtnNext: response.next ? true : false,
         enableBtnPrevious: response.previous ? true : false,
       })
-      console.log("response : " + Store.getter());
     }
   },
 
@@ -136,8 +141,8 @@ let Planet = {
     let view = Planet.template(data.planets)
     $.document(Planet.name).replace(view)
     Store.mutation.switchLoading(false)
-    Loading.render()
-    Navigate.render()
+    $state.Action.notify.loading()
+    $state.Action.notify.navigate()
   }
 }
 

@@ -1,6 +1,5 @@
 import DOMHelper from "../lib/domhelper.js"
 import Store from "../store/store.js"
-import Planet from "./planet.js"
 
 const $ = DOMHelper
 const $state = Store
@@ -10,7 +9,7 @@ let Navigate = {
   template: (data) => {
     let view = `
       <div class="column">
-        <div id='navigate' class="columns is-mobile is-multi-line is-centered">
+        <div class="columns is-mobile is-multi-line is-centered">
           <div class="field">
             <div class="column control">
               <div class="select is-primary">
@@ -46,6 +45,11 @@ let Navigate = {
     sync: () => {
       return Navigate.data = Object.assign(Navigate.data, $state.getter())
     }
+  },
+
+  init: () => {
+    $state.Action.unsubscribe.navigate()
+    $state.Action.subscriber.navigateRender(data => Navigate.render())
   },
 
   method: {
@@ -126,6 +130,7 @@ let Navigate = {
       Store.mutation.change({
         planets: planets.slice(0, 10)
       })
+      $state.Action.notify.planetRender()
       return Store.getter().planets
     },
 
@@ -143,11 +148,12 @@ let Navigate = {
           isShowLoading: true,
           pageIndex: (Navigate.data.pageIndex - 1)
         })
-        Planet.method.loadResource()
+        $state.Action.notify.loadResource()
       }
     },
 
     next: () => {
+      console.log("next");
       let data = Navigate.data.sync()
       if (data.next) {
         Store.mutation.change({
@@ -155,7 +161,7 @@ let Navigate = {
           isShowLoading: true,
           pageIndex: (Navigate.data.pageIndex + 1)
         })
-        Planet.method.loadResource()
+        $state.Action.notify.loadResource()
       }
     },
 
@@ -166,23 +172,25 @@ let Navigate = {
 
   render: () => {
     let data = Navigate.data.sync()
-    console.log(data);
-    $.document(Navigate.name).replace(Navigate.template(data))
-    $.document("#next").click(() => Navigate.method.next())
-    $.document("#prev").click(() => Navigate.method.previous())
+    $.elements(Navigate.name).forEach(e => {
+      e = $.document(Navigate.name).replace(Navigate.template(data))
+      $.document(e).child("#next").click(() => Navigate.method.next())
+      $.document(e).child("#prev").click(() => Navigate.method.previous())
 
-    let filterBy = $.el("#filterBy")
-    $.document(filterBy).change(() => {
-      Store.mutation.filterBy(filterBy.options[filterBy.selectedIndex].value)
-    })
+      let filterBy = $.document(e).child("#filterBy").getElement()
+      filterBy.value = data.filterBy
+      $.document(filterBy).change(() => {
+        Store.mutation.filterBy(filterBy.options[filterBy.selectedIndex].value)
+      })
 
-    let searchTextEl = $.el("#searchText")
-    searchTextEl.selectionStart = searchTextEl.selectionEnd = searchTextEl.value.length;
-    searchTextEl.focus()
-    $.document(searchTextEl).keyUp(() => {
-      Store.mutation.searchText(searchTextEl.value)
-      Navigate.method.search()
-      Planet.render()
+      let searchTextEl = $.document(e).child("#searchText").getElement()
+      console.log(searchTextEl);
+      searchTextEl.selectionStart = searchTextEl.selectionEnd = searchTextEl.value.length;
+      searchTextEl.focus()
+      $.document(searchTextEl).keyUp(() => {
+        Store.mutation.searchText(searchTextEl.value)
+        Navigate.method.search()
+      })
     })
   }
 }
