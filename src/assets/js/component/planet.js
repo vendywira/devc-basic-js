@@ -1,13 +1,12 @@
 import HttpLib from "../lib/httplib.js"
 import DOMHelper from "../lib/domhelper.js"
-import Store from "../store/store.js"
 import Loading from './loading.js';
+import Navigate from './navigate.js';
+import Store from "../store/store.js"
 
 const http = new HttpLib
 const $ = DOMHelper
-const $state = Store.state.planet
-const $navigate = Store.state.navigate
-const $loading = Store.state.loading
+const $state = Store
 
 let Planet = {
   name: 'planet',
@@ -51,6 +50,9 @@ let Planet = {
 
   method: {
     loadResource: async () => {
+      Store.mutation.switchLoading(true)
+      Loading.render()
+
       let data = Planet.data.sync()
       let index = data.pageIndex
       let page = data.pages[index]
@@ -101,7 +103,7 @@ let Planet = {
       return Number(url.split("page=")[1]) - 1
     },
 
-    _responseConverter: response => {
+    _getPages: response => {
       let page = {
         count: response.count,
         next: response.next,
@@ -109,25 +111,23 @@ let Planet = {
         results: response.results,
         planets: response.results
       }
-      console.log(response);
-      let pagesData = Planet.method._pushAtIndex(response.pageIndex, response.pages, page)
+      return Planet.method._pushAtIndex(response.pageIndex, response.pages, page)
+    },
 
-      let planetData = {
+    _responseConverter: response => {
+      Store.mutation.change({
         count: response.count,
-        pageIndex: response.pageIndex,
-        planets: response.results,
-        pages: pagesData,
-      }
-      $state.setter(planetData)
-
-      let navigateData = {
         next: response.next,
         previous: response.previous,
-        posibleNext: response.next ? true : false,
-        posiblePrevious: response.previous ? true : false,
-        pages: pagesData,
-      }
-      $navigate.setter(navigateData)
+        results: response.results,
+        planets: response.results,
+        pageIndex: response.pageIndex,
+        planets: response.results,
+        pages: Planet.method._getPages(response),
+        enableBtnNext: response.next ? true : false,
+        enableBtnPrevious: response.previous ? true : false,
+      })
+      console.log("response : " + Store.getter());
     }
   },
 
@@ -135,11 +135,9 @@ let Planet = {
     let data = Planet.data.sync()
     let view = Planet.template(data.planets)
     $.document(Planet.name).replace(view)
-
-    $loading.setter({
-      isShow: false
-    })
+    Store.mutation.switchLoading(false)
     Loading.render()
+    Navigate.render()
   }
 }
 

@@ -1,58 +1,41 @@
 let Store = {
   state: {
-    navigate: {
-      data: {
-        next: "",
-        prev: "",
-        posibleNext: true,
-        posiblePrevious: false,
-        pages: [],
-        filterBy: "all",
-        searchText: "",
-      },
-      setter: data => {
-        $navigate = Object.assign($navigate, data)
-      },
-      getter: () => {
-        return $navigate
-      }
+    next: "",
+    previous: "",
+    enableBtnNext: true,
+    enableBtnPrevious: false,
+    filterBy: "all",
+    searchText: "",
+    url: "https://swapi.co/api/planets/?page=1",
+    count: 0,
+    pageIndex: 0,
+    planets: [],
+    pages: [],
+    isShowLoading: true,
+  },
+  mutation: {
+    change(object) {
+      Object.assign(Store.state, object)
     },
-    planet: {
-      data: {
-        url: "https://swapi.co/api/planets/?page=1",
-        count: 0,
-        pageIndex: 0,
-        planets: [],
-        pages: [],
-      },
-      setter: data => {
-        $planet = Object.assign($planet, data)
-      },
-      getter: () => {
-        return $planet
-      }
+    switchLoading(isShow) {
+      Object.assign(Store.state, {
+        isShowLoading: isShow
+      })
     },
-    loading: {
-      data: {
-        isShow: true,
-      },
-      setter: data => {
-        $loading = Object.assign($loading, data)
-      },
-      getter: () => {
-        return $loading
-      }
+    searchText(text) {
+      Object.assign(Store.state, {
+        searchText: text
+      })
+    },
+    filterBy(filter) {
+      Object.assign(Store.state, {
+        filterBy: filter
+      })
     }
   },
-
-  action: {
-
+  getter: function () {
+    return this.state
   }
-
 }
-
-let $navigate = Store.state.navigate.data
-let $planet = Store.state.planet.data
-let $loading = Store.state.loading.data
 
 export default Store;

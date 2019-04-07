@@ -1,9 +1,9 @@
 import DOMHelper from "../lib/domhelper.js"
 import Store from "../store/store.js"
+import Planet from "./planet.js"
 
 const $ = DOMHelper
-const $state = Store.state.navigate
-const $planet = Store.state.planet
+const $state = Store
 
 let Navigate = {
   name: 'navigate',
@@ -32,8 +32,8 @@ let Navigate = {
           </div>
           <div class="field">
             <div class="column control">
-              <buthon class="pagination-previous" id="prev" ${data.posiblePrevious ? '' : 'disabled'}>prev</buthon>
-              <button class="pagination-next" id="next" ${data.posibleNext ? '' : 'disabled'}>next</button>
+              <buthon class="pagination-previous" id="prev" ${data.enableBtnPrevious ? '' : 'disabled'}>prev</buthon>
+              <button class="pagination-next" id="next" ${data.enableBtnNext ? '' : 'disabled'}>next</button>
             </div>
           </div>
         </div>
@@ -123,11 +123,10 @@ let Navigate = {
           console.log(planets);
           break
       }
-
-      $planet.setter({
+      Store.mutation.change({
         planets: planets.slice(0, 10)
       })
-      return $planet.getter().planets
+      return Store.getter().planets
     },
 
     _uniqueValidation: (object, arr) => {
@@ -139,22 +138,24 @@ let Navigate = {
     previous: () => {
       let data = Navigate.data.sync()
       if (data.previous) {
-        $planet.setter({
+        Store.mutation.change({
           url: data.previous,
-          pageIndex: ($planet.data.pageIndex - 1)
+          isShowLoading: true,
+          pageIndex: (Navigate.data.pageIndex - 1)
         })
-        Navigate.render()
+        Planet.method.loadResource()
       }
     },
 
     next: () => {
       let data = Navigate.data.sync()
       if (data.next) {
-        $planet.setter({
+        Store.mutation.change({
           url: data.next,
-          pageIndex: ($planet.data.pageIndex + 1)
+          isShowLoading: true,
+          pageIndex: (Navigate.data.pageIndex + 1)
         })
-        Navigate.render()
+        Planet.method.loadResource()
       }
     },
 
@@ -165,8 +166,22 @@ let Navigate = {
 
   render: () => {
     let data = Navigate.data.sync()
-    $.document(Navigate.name).replace(Navigate.template(data))
     console.log(data);
+    $.document(Navigate.name).replace(Navigate.template(data))
+    $.document("#next").click(() => Navigate.method.next())
+    $.document("#prev").click(() => Navigate.method.previous())
+
+    let filterBy = $.el("#filterBy")
+    $.document(filterBy).change(() => {
+      Store.mutation.filterBy(filterBy.options[filterBy.selectedIndex].value)
+    })
+
+    let searchTextEl = $.el("#searchText")
+    $.document(searchTextEl).keyUp(() => {
+      Store.mutation.searchText(searchTextEl.value)
+      Navigate.method.search()
+      Planet.render()
+    })
   }
 }
 
