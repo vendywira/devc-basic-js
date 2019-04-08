@@ -1,18 +1,36 @@
-import Planet from "./component/planet.js"
-import Navigate from "./component/navigate.js"
 import App from "./lib/app.js"
-import Loading from "./component/loading.js";
+import Header from "./component/header.js"
+import Banner from "./component/banner.js"
+import About from "./component/about.js"
+import Testimonial from "./component/testimonial.js"
+import Feature from "./component/feature.js"
+import Team from "./component/team.js"
+import Pricing from "./component/pricing.js"
+import Contact from "./component/contact.js"
+import Footer from "./component/footer.js"
 
 new App({
   el: "#app",
   template: `
-    <loading></loading>
-    <navigate></navigate>
-    <planet></planet>`,
+    <header></header>
+    <banner></banner>
+    <about></about>
+    <testimonial></testimonial>
+    <feature></feature>
+    <team></team>
+    <pricing></pricing>
+    <contact></contact>
+    <footer></footer>
+    `,
   main: () => {
-    Navigate.init()
-    Loading.init()
-    Planet.init()
-    Planet.method.loadResource()
+    Header.render()
+    Banner.render()
+    About.render()
+    Testimonial.render()
+    Feature.render()
+    Team.render()
+    Pricing.render()
+    Contact.render()
+    Footer.render()
   }
 })
