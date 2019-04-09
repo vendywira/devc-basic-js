@@ -2,14 +2,20 @@
 Learn more about basic html, css and js with expert on devc community Jakarta.
 
 ## Exercise 1: Introduce html and css
-![screenshot cv](sc-cv.png "exercise 1 introduce html and css")
+###### click image to live demo
+[![screenshot cv](sc-cv.png "exercise 1 introduce html and css")](https://vendywira.github.io/devc-basic-js/src/exercise-1-introduce-html-css/)
 
 ## Exercise 2: Basic js and DOM manipulation
-![screenshot calculator](sc-calculator.png "exercise 2 basic js and dom manipulation")
+###### click image to live demo
+[![screenshot calculator](sc-calculator.png "exercise 2 basic js and dom manipulation")](https://vendywira.github.io/devc-basic-js/src/exercise-2-basic-js-and-dom-manipulation/)
 
 ## Exercise 3: Basic Logic JS
-###### click image to preview this exercise
-[![screenshot table swapi](sc-table-swapi.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/index.html)
+###### click image to live demo
+[![screenshot table swapi](sc-table-swapi.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/exercise-3-javascript-and-basic-logic/)
+
+## Exercise 4: final project
+###### click image to live demo
+[![screenshot table swapi](sc-final-project.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/exercise-3-javascript-and-basic-logic/)
 
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
@@ -53,6 +59,9 @@ scientific.addEventListener('click', e => {
 })
 ```
 ## Component Base
-on exercise 3, I learn about function, class and object. also i read some literation about component base and how implement best practice on js. on all literation almost used on modern framework like react, vue or angular. but i think i can implement also on vanilla js. there are some problem when i try to implement. such as the component should be independent not depend to other, first problem i found about how to communicate between components?
-ok i have solution to provide each components their own data and i will pass that data when communicate. but we must be remember, component is independent to other.
-i try to solve this problem with create center global data to store shared data. but blowup other problem, the component not only communicate with data, but also necessery action like loading and etc. therefor we need provide central action abstraction for component which one need call action other action. but for present, still try to implement central action and not yet going done.
+on exercise 3, I learn about function, class and object. also i read some literation about component base and how implement best practice on js. on all literation almost used on modern framework like react, vue or angular. but i want to implement on vanilla js. there are some problem when i try to implement it. such as the component should be independent not depend to other, first problem i found about how to communicate between components.
+and i found a solution to provide each components their own data and will passing when communicate. but we must be remember, component is independent to other.
+To resolve this problem i create global data center for sharing data that call state. but appear other problem, the component not only communicate with data, but also necessery action like loading and etc. therefor we need provide central action abstraction for component which one need call action other action. when i try to implement center action, i found matter about cyclic dependency. if we on java usually we use interface for loose coupling. but on js not have interface like java. after read some literation about it, finally i found a solution. the solution is use observable pattern to increase loose coupling on js. step 1 we must register the function which one subscribe the event, and when event trigered by other subcriber will receive updated data. And finally i have implemented component base on js. I also create some library utility to help call http, dom manipulation and main app (inspired by vue js work)
+
+## Learn Bootstrap JQuery
+on exercise 4 i have learn about media query, bootstrap and jquery used. very helpful for fast development web used bootstrap and jquery, but i have concern about performance. because jquery to heavy when firstly load when render webapp.
