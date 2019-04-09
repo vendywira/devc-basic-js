@@ -40,7 +40,8 @@ a:focus {
   text-decoration: none;
 }
 
-.btn, a.btn {
+.btn,
+a.btn {
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -ms-transition: all 0.4s ease-in-out;
@@ -50,11 +51,13 @@ a:focus {
   line-height: 1.5;
 }
 
-.btn .fa, a.btn .fa {
+.btn .fa,
+a.btn .fa {
   margin-right: 5px;
 }
 
-.btn-cta, a.btn-cta {
+.btn-cta,
+a.btn-cta {
   font-weight: bold;
   font-size: 16px;
   padding: 10px 30px;
@@ -66,7 +69,11 @@ a:focus {
   color: #fff;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.hover {
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.hover {
   background: #3aa7aa;
   color: #fff;
   border: 1px solid #3aa7aa;
@@ -262,7 +269,7 @@ a:focus {
   background-clip: padding-box;
 }
 
-.main-nav .navbar-toggler .icon-bar + .icon-bar {
+.main-nav .navbar-toggler .icon-bar+.icon-bar {
   margin-top: 4px;
 }
 
@@ -306,7 +313,7 @@ a:focus {
   margin-right: 0;
 }
 
-.nav > li > a {
+.nav>li>a {
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -369,7 +376,7 @@ a:focus {
 }
 
 .hero-carousel .carousel-inner .item-1 {
-  background-image: url("../images/hero-1.jpg");
+  background-image: url("../images/google-award.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -377,7 +384,7 @@ a:focus {
 }
 
 .hero-carousel .carousel-inner .item-2 {
-  background-image: url("../images/hero-2.jpg");
+  background-image: url("../images/the-best-gdk-2018.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -385,7 +392,7 @@ a:focus {
 }
 
 .hero-carousel .carousel-inner .item-3 {
-  background-image: url("../images/hero-3.jpg");
+  background-image: url("../images/leader-google-indonesia.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -404,7 +411,7 @@ a:focus {
   font-size: 18px;
 }
 
-.hero-carousel .carousel-inner .intro + .btn {
+.hero-carousel .carousel-inner .intro+.btn {
   margin-top: 15px;
 }
 
@@ -961,25 +968,32 @@ a:focus {
     background: rgba(49, 52, 58, 0.9);
     z-index: 40;
   }
+
   .header.header-scrolled .main-nav .nav .nav-link.active {
     color: #40babd;
     border: none;
   }
+
   .main-nav .navbar-collapse .nav-item {
     margin-right: 0;
   }
+
   .main-nav .navbar-collapse .nav-item a {
     text-align: center;
   }
+
   .hero-section .figure-image {
     width: 300px;
   }
+
   .hero-carousel .carousel-inner .heading {
     font-size: 26px;
   }
+
   .hero-carousel .carousel-inner .item-content-inner {
     padding-top: 100px;
   }
+
   .hero-section .figure-holder .figure-image {
     width: inherit;
     bottom: 0;
@@ -988,34 +1002,117 @@ a:focus {
     left: 15px;
     max-width: 320px;
   }
+
   .technologies li {
     margin-bottom: 15px;
   }
+
   .members-wrapper .item {
     margin-bottom: 30px;
   }
+
   .members-wrapper .item:last-child {
     margin-bottom: 0;
   }
+
   .hero-carousel {
     height: 660px;
   }
+
   .hero-section .carousel-inner {
     height: 660px;
   }
+
   .hero-carousel .carousel-inner .item {
     height: 660px;
   }
+
   .testimonials-section .item .profile-image {
     width: 60px;
     height: 60px;
   }
+
   .testimonials-section .item .quote {
     margin-left: 85px;
     padding: 15px;
   }
+
   .testimonials-section .item.item-reversed .quote {
     margin-right: 85px;
+  }
+}
+
+.portfolio-item {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  max-width: 530px;
+  margin: auto auto 1rem;
+}
+
+.portfolio-item .caption {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(33, 37, 41, 0.2);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.portfolio-item .caption .caption-content {
+  color: #fff;
+  margin: auto 2rem 2rem;
+}
+
+.portfolio-item .caption .caption-content h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.portfolio-item .caption .caption-content p {
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+@media (min-width: 992px) {
+  .portfolio-item {
+    max-width: none;
+    margin: 0;
+  }
+
+  .portfolio-item .caption {
+    -webkit-transition: -webkit-clip-path 0.25s ease-out, background-color 0.7s;
+    -webkit-clip-path: inset(0px);
+    clip-path: inset(0px);
+  }
+
+  .portfolio-item .caption .caption-content {
+    -webkit-transition: opacity 0.25s;
+    transition: opacity 0.25s;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-bottom: 5rem;
+  }
+
+  .portfolio-item img {
+    -webkit-transition: -webkit-clip-path 0.25s ease-out;
+    -webkit-clip-path: inset(-1px);
+    clip-path: inset(-1px);
+  }
+
+  .portfolio-item:hover img {
+    -webkit-clip-path: inset(2rem);
+    clip-path: inset(2rem);
+  }
+
+  .portfolio-item:hover .caption {
+    background-color: rgba(29, 128, 159, 0.9);
+    -webkit-clip-path: inset(2rem);
+    clip-path: inset(2rem);
   }
 }
 
@@ -1024,11 +1121,13 @@ a:focus {
     text-align: left;
     padding-left: 30px;
   }
+
   .hero-section .figure-holder .figure-image {
     width: 360px;
     bottom: inherit;
     top: 130px;
   }
+
   .hero-carousel .carousel-inner .item-content-inner {
     max-width: 300px;
     padding-top: 120px;
@@ -1039,15 +1138,18 @@ a:focus {
   .main-nav .nav .nav-item {
     margin-right: 25px;
   }
+
   .feature-nav {
     margin-top: 30px;
     padding-left: 15px;
   }
+
   .hero-section .figure-holder .figure-image {
     width: 420px;
     bottom: inherit;
     top: 130px;
   }
+
   .hero-carousel .carousel-inner .item-content-inner {
     max-width: 500px;
   }

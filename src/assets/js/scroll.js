@@ -2,9 +2,9 @@ $(document).ready(function () {
 
     $(window).bind('scroll', function () {
         if ($(window).scrollTop() > 0) {
-            $('#nav-header').addClass('header-scrolled');
+            $('#header').addClass('header-scrolled');
         } else {
-            $('#nav-header').removeClass('header-scrolled');
+            $('#header').removeClass('header-scrolled');
         }
     });
 
