@@ -171,42 +171,55 @@
         <!-- Nav tabs -->
         <div class="feature-nav nav nav-pill flex-column col-lg-4 col-md-6 col-12 order-0 order-md-1" role="tablist"
           aria-orientation="vertical">
-          <a class="nav-link active mb-lg-3" href="#feature-1" aria-controls="feature-1" data-toggle="pill" role="tab"
+          <a class="nav-link active mb-lg-3" href="#exercise-1" aria-controls="exercise-1" data-toggle="pill" role="tab"
             aria-selected="true"><i class="fas fa-book mr-2"></i>Exercise 1 create CV online</a>
-          <a class="nav-link mb-lg-3" href="#feature-2" aria-controls="feature-2" data-toggle="pill" role="tab"
+          <a class="nav-link mb-lg-3" href="#exercise-2" aria-controls="exercise-2" data-toggle="pill" role="tab"
             aria-selected="false"><i class="fas fa-calculator mr-2"></i>Exercise 2 create calculator scientific</a>
-          <a class="nav-link mb-lg-3" href="#feature-3" aria-controls="feature-3" data-toggle="pill" role="tab"
+          <a class="nav-link mb-lg-3" href="#exercise-3" aria-controls="exercise-3" data-toggle="pill" role="tab"
             aria-selected="false"><i class="fas fa-chart-bar mr-2"></i>Exercise 3 feacth data from swappi</a>
-          <a class="nav-link mb-lg-3" href="#feature-4" aria-controls="feature-4" data-toggle="pill" role="tab"
+          <a class="nav-link mb-lg-3" href="#exercise-4" aria-controls="exercise-4" data-toggle="pill" role="tab"
             aria-selected="false"><i class="fas fa-code mr-2"></i>Exercise 4 final project</a>
         </div>
 
-        <!-- Tab panes -->
         <div class="feature-content tab-content col-lg-8 col-md-6 col-12 order-1 order-md-0">
-          <div role="tabpanel" class="tab-pane fade show active" id="feature-1">
-            <a href="https://vendywira.github.io/devc-basic-js/src/exercise-1-introduce-html-css/" target="_blank"><img
-                class="img-fluid" src="assets/images/sc-cv.png" alt="screenshot"></a>
+          <div role="tabpanel" class="tab-pane fade show active" id="exercise-1">
+            <img id="exercise-1-img" onclick="modalClick('exercise-1-img')" class="img-fluid"
+              src="assets/images/sc-cv.png"
+              link="https://vendywira.github.io/devc-basic-js/src/exercise-1-introduce-html-css/"
+              alt="Exercise 1 Introduce HTML and CSS">
           </div>
-          <div role="tabpanel" class="tab-pane fade" id="feature-2">
-            <a href="https://vendywira.github.io/devc-basic-js/src/exercise-2-basic-js-and-dom-manipulation/"
-              target="_blank"><img class="img-fluid" src="assets/images/sc-calculator.png" alt="screenshot"></a>
+          <div role="tabpanel" class="tab-pane fade" id="exercise-2">
+            <img id="exercise-2-img" onclick="modalClick('exercise-2-img')" class="img-fluid"
+              src="assets/images/sc-calculator.png"
+              link="https://vendywira.github.io/devc-basic-js/src/exercise-2-basic-js-and-dom-manipulation/"
+              alt="Exercise 2 Basic Javascript and DOM Manipulation">
           </div>
-          <div role="tabpanel" class="tab-pane fade" id="feature-3">
-            <a href="https://vendywira.github.io/devc-basic-js/src/exercise-3-javascript-and-basic-logic/"
-              target="_blank"><img class="img-fluid" src="assets/images/sc-table-swapi.png" alt="screenshot"></a>
+          <div role="tabpanel" class="tab-pane fade" id="exercise-3">
+            <img id="exercise-3-img" onclick="modalClick('exercise-3-img')" class="img-fluid"
+              src="assets/images/sc-table-swapi.png"
+              link="https://vendywira.github.io/devc-basic-js/src/exercise-3-javascript-and-basic-logic/"
+              alt="Exercise 3 Javascript and Basic Logic">
           </div>
-          <div role="tabpanel" class="tab-pane fade" id="feature-4">
-            <a href="https://vendywira.github.io/devc-basic-js/src/exercise-4-final-project/" target="_blank"><img
-                class="img-fluid" src="assets/images/sc-final-project.png" alt="screenshot"></a>
+          <div role="tabpanel" class="tab-pane fade" id="exercise-4">
+            <img id="exercise-4-img" onclick="modalClick('exercise-4-img')" class="img-fluid"
+              src="assets/images/sc-final-project.png"
+              link="https://vendywira.github.io/devc-basic-js/src/exercise-4-final-project/"
+              alt="Exercise 4 Final Project">
           </div>
         </div>
-        <!--//feature-content-->
       </div>
-      <!--//tabbed-area-->
     </div>
-    <!--//container-->
   </div>
-  <!--//features-->
+
+  <div id="modal" class="modal-section">
+    <div id="modal-section" class="modal">
+      <span id="modal-close" class="close">&times;</span>
+      <a id="modal-link" target="_blank">
+        <img class="modal-content" id="modal-img">
+        <div id="modal-caption"></div>
+      </a>
+    </div>
+  </div>
 
   <div id="testimonials" class="testimonials-section">
     <div class="container">
@@ -335,17 +348,16 @@
     <div class="container">
       <small class="copyright">Created by <a href="https://id.linkedin.com/in/vendywira/" target="_blank">I Wayan Vendy
           Wiranatha</a> for final project DevC Jakarta</small>
-
-
     </div>
     <!--//container-->
   </footer>
 
   <!-- Javascript -->
-  <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery.scrollTo.min.js"></script>
-  <script type="text/javascript" src="assets/js/scroll.js"></script>
+  <script type="text/javascript" src="./assets/js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./assets/js/jquery.scrollTo.min.js"></script>
+  <script type="text/javascript" src="./assets/js/scroll.js"></script>
+  <script type="text/javascript" src="./assets/js/modal.js"></script>
 </body>
 
 </html>
