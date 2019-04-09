@@ -15,7 +15,7 @@ Learn more about basic html, css and js with expert on devc community Jakarta.
 
 ## Exercise 4: final project
 ###### click image to live demo
-[![screenshot table swapi](sc-final-project.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/exercise-3-javascript-and-basic-logic/)
+[![screenshot table swapi](sc-final-project.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/exercise-4-final-project/)
 
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
