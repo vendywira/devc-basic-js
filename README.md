@@ -66,7 +66,7 @@ To resolve this problem i create global data center for sharing data that call s
 ## Learn Bootstrap JQuery
 on exercise 4 i have learn about media query, bootstrap and jquery used. very helpful for fast development web used bootstrap and jquery, but i have concern about performance. because jquery to heavy when firstly load when render webapp.
 
-##License
+## License
 The MIT License (MIT)
 
 Copyright (c) 2019 I Wayan Vendy Wiranatha
