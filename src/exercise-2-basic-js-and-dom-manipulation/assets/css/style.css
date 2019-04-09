@@ -1,0 +1,97 @@
+.grid__md-1 {
+  width: 8.3333333333%;
+}
+.grid__md-2 {
+  width: 16.6666666667%;
+}
+.grid__md-3 {
+  width: 25%;
+}
+.grid__md-4 {
+  width: 33.3333333333%;
+}
+.grid__md-5 {
+  width: 41.6666666667%;
+}
+.grid__md-6 {
+  width: 50%;
+}
+.grid__md-7 {
+  width: 58.3333333333%;
+}
+.grid__md-8 {
+  width: 66.6666666667%;
+}
+.grid__md-9 {
+  width: 75%;
+}
+.grid__md-10 {
+  width: 83.3333333333%;
+}
+.grid__md-12 {
+  width: 100%;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.button {
+  padding: 0.1%;
+  color: white;
+  margin: 0.25%;
+  text-align: center;
+  border-radius: 30%;
+  font-size: 2.5vw;
+  width: 18%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+.button:active {
+  background-color: white;
+}
+.button--red {
+  background: #e03939;
+}
+.button--black {
+  background: #000;
+}
+.button--orange {
+  background: #f89b22;
+}
+.button--grey {
+  background: grey;
+}
+
+html {
+  background-image: linear-gradient(to right, #2a9bf8, #e6e6dd);
+}
+
+.scientific {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.calculator {
+  border-radius: 20px;
+  background-color: #ebead1;
+  margin: 0 auto;
+  margin: auto;
+  padding-bottom: 5%;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  padding-top: 2%;
+}
+
+.calculator__display {
+  padding: 20px;
+  line-height: 50px;
+  border-radius: 20px;
+  text-align: right;
+  color: white;
+  font-size: 2.5vw;
+  background-color: #000;
+  margin-bottom: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */
