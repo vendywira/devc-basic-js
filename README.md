@@ -2,11 +2,11 @@
 Learn more about basic html, css and js with expert on devc community Jakarta.
 
 ## Exercise 1: Introduce html and css
-![screenshot cv](sc-cv.png "exercise 1 introduce html and css")
+[![screenshot cv](sc-cv.png "exercise 1 introduce html and css")](https://vendywira.github.io/devc-basic-js/src/exercise-1-introduce-html-css/)
 
 ## Exercise 2: Basic js and DOM manipulation
 ###### click image to preview functionality
-[![screenshot cv](sc-calculator.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/index.html)
+[![screenshot cv](sc-calculator.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/exercise-2-basic-js-and-dom-manipulation/)
 
 
 ## Sass what is this??
