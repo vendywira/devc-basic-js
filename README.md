@@ -1,7 +1,7 @@
 # devc-basic-js
 Learn more about basic html, css and js with expert on devc community Jakarta.
 
-[![screenshot cv](sc-cv.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/index.html)
+[![screenshot cv](sc-cv.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/exercise-1-introduce-html-css/)
 
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
