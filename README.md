@@ -2,14 +2,14 @@
 Learn more about basic html, css and js with expert on devc community Jakarta.
 
 ## Exercise 1: Introduce html and css
-![screenshot cv](sc-cv.png "exercise 1 introduce html and css")
+[![screenshot cv](sc-cv.png "exercise 1 introduce html and css")](https://vendywira.github.io/devc-basic-js/src/exercise-1-introduce-html-css/)
 
 ## Exercise 2: Basic js and DOM manipulation
-![screenshot calculator](sc-calculator.png "exercise 2 basic js and dom manipulation")
+[![screenshot calculator](sc-calculator.png "exercise 2 basic js and dom manipulation")](https://vendywira.github.io/devc-basic-js/src/exercise-2-basic-js-and-dom-manipulation/)
 
 ## Exercise 3: Basic Logic JS
 ###### click image to preview this exercise
-[![screenshot table swapi](sc-table-swapi.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/index.html)
+[![screenshot table swapi](sc-table-swapi.png "click to preview")](https://vendywira.github.io/devc-basic-js/src/exercise-3-javascript-and-basic-logic/)
 
 ## Sass what is this??
 when stylesheets are getting larger, more complex,
